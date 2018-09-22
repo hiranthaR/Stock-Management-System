@@ -1,0 +1,27 @@
+.admin-menu-item {
+    -fx-background-color: #283655;
+    -fx-padding: 0px 0px 0px 4px;
+}
+
+.admin-menu-item:hover {
+    -fx-background-color: linear-gradient(to right, #4d648d, #283655);
+    -fx-border-color: aqua;
+    -fx-border-width: 0px 0px 0px 4px;
+    -fx-padding: 0px 0px 0px 0px;
+}
+
+.close-button {
+    -fx-background-color: #a51f27;
+}
+
+.close-button:hover {
+    -fx-background-color: #d60e1a;
+}
+
+.minimize-button {
+    -fx-background-color: #02772f;
+}
+
+.minimize-button:hover {
+    -fx-background-color: #03a842;
+}

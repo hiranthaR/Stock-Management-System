@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.hirantha.controllers.admin.customers.CustomerRow">
+    <children>
+        <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                    AnchorPane.topAnchor="0.0">
+            <children>
+                <AnchorPane prefHeight="80.0" prefWidth="600.0" styleClass="customer-row-layout"
+                            stylesheets="@../../../css/admin/dashboard/customers/customer_row.css">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../icons/man.png"/>
+                                    </image>
+                                </ImageView>
+                                <VBox prefHeight="78.0" prefWidth="518.0">
+                                    <HBox.margin>
+                                        <Insets left="10.0"/>
+                                    </HBox.margin>
+                                </VBox>
+                            </children>
+                            <padding>
+                                <Insets left="10.0"/>
+                            </padding>
+                        </HBox>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
