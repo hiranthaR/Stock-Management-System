@@ -6,3 +6,13 @@
     -fx-border-radius: 2px;
     -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.8), 20, 0, 0, 0);
 }
+
+.customer-row-layout:hover {
+    -fx-background-color: #cef5ff;
+}
+
+.customer-row-rank {
+    -fx-background-radius: 100px;
+    -fx-background-color: #f96352;
+
+}

@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -20,24 +19,40 @@ public class CustomerController implements Initializable {
     private Button btnBtn;
 
     @FXML
-    private ScrollPane customerRowScrollPane;
+    private VBox rowsContainer;
 
     @FXML
-    private VBox rowContainer;
+    private AnchorPane profileContainer;
 
+    private CustomerProfileController customerProfileController;
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-//        customerRowScrollPane.
+        //load and get the controller for profile showing pane
+        FXMLLoader profileFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/costomers/customer_profile.fxml"));
+        customerProfileController = profileFxmlLoader.getController();
+        try {
+            profileContainer.getChildren().add(profileFxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         btnBtn.setOnMouseClicked(e -> {
             try {
-                AnchorPane row = FXMLLoader.load(getClass().getResource("/com/hirantha/fxmls/admin/costomers/customer_row.fxml"));
-                rowContainer.getChildren().add(row);
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/costomers/customer_row.fxml"));
+                AnchorPane row = fxmlLoader.load();
+                CustomerRowController rowController = fxmlLoader.getController();
+                rowController.setParentController(this);
+                rowsContainer.getChildren().add(row);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         });
+    }
+
+    public CustomerProfileController getCustomerProfileController() {
+        return customerProfileController;
     }
 }

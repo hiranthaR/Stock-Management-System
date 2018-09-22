@@ -27,6 +27,30 @@
                                       AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                                       AnchorPane.topAnchor="0.0">
                                     <children>
+                                        <AnchorPane prefHeight="50.0" prefWidth="1553.0">
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT" AnchorPane.bottomAnchor="0.0"
+                                                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                                      AnchorPane.topAnchor="0.0">
+                                                    <children>
+                                                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
+                                                            <HBox.margin>
+                                                                <Insets left="10.0" right="7.0"/>
+                                                            </HBox.margin>
+                                                            <image>
+                                                                <Image url="@../../icons/settings.png"/>
+                                                            </image>
+                                                        </ImageView>
+                                                        <Label text="Dehannegama Hardware" textFill="#eee9e9">
+                                                            <font>
+                                                                <Font name="Noto Mono" size="22.0"/>
+                                                            </font>
+                                                        </Label>
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                        </AnchorPane>
                                         <Button fx:id="btnMinimize" alignment="CENTER_RIGHT" mnemonicParsing="false"
                                                 styleClass="minimize-button"
                                                 stylesheets="@../../css/admin/dashboard/admincss.css" text="_"

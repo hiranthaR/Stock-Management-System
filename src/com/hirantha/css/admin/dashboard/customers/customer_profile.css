@@ -1,0 +1,32 @@
+.customer-profile-layout {
+    -fx-background-radius: 2px;
+    -fx-border-width: 1px;
+    -fx-border-color: #283655;
+    -fx-background-color: #fcfcfc;
+    -fx-border-radius: 2px;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.8), 20, 0, 0, 0);
+}
+
+.customer-profile-button {
+    -fx-pref-width: 120px;
+    -fx-pref-height: 38px;
+    -fx-font-family: "Noto Mono";
+    -fx-font-size: 15px;
+}
+
+.edit {
+    -fx-background-color: chartreuse;
+}
+
+.delete {
+    -fx-background-color: #f96352;
+}
+
+.edit:hover {
+    -fx-background-color: #9effa3;
+}
+
+.delete:hover {
+    -fx-background-color: #ffcf8d;
+}
+
