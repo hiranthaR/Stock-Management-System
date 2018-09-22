@@ -1,4 +1,23 @@
 package com.hirantha.controllers.admin;
 
-public class ItemsController {
+import com.hirantha.models.Controller;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ItemsController implements Controller {
+    @Override
+    public void setParentController(Controller controller) {
+
+    }
+
+    @Override
+    public Controller getParentController() {
+        return null;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }
