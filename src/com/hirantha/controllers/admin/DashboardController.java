@@ -4,6 +4,7 @@ import animatefx.animation.FadeIn;
 import com.hirantha.models.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -14,7 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DashboardController implements Controller {
+public class DashboardController implements Initializable {
 
     @FXML
     private HBox topnavbar;
@@ -48,31 +49,28 @@ public class DashboardController implements Controller {
 
     private double x;
     private double y;
-    private FXMLLoader customersFxmlLoader;
-    private FXMLLoader itemsFxmlLoader;
-    private FXMLLoader stocksFxmlLoader;
-    private FXMLLoader financialFxmlLoader;
     private AnchorPane customersPane;
     private AnchorPane itemsPane;
     private AnchorPane stocksPane;
     private AnchorPane financialPane;
+    private AnchorPane currentPane;
 
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
-            customersFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/costomers/customers.fxml"));
-            itemsFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/items.fxml"));
-            stocksFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/stocks.fxml"));
-            financialFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/financial.fxml"));
+            FXMLLoader customersFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/costomers/customers.fxml"));
+            FXMLLoader itemsFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/items.fxml"));
+            FXMLLoader stocksFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/stocks.fxml"));
+            FXMLLoader financialFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/financial.fxml"));
 
             customersPane = customersFxmlLoader.load();
             itemsPane = itemsFxmlLoader.load();
             stocksPane = stocksFxmlLoader.load();
             financialPane = financialFxmlLoader.load();
 
-            changePane(customersPane, customersFxmlLoader.getController());
+            changePane(customersPane);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,43 +89,32 @@ public class DashboardController implements Controller {
 
         btnClose.setOnMouseClicked(e -> btnClose.getScene().getWindow().hide());
 
-        menuCustomers.setOnMouseClicked(event -> changePane(customersPane, customersFxmlLoader.getController()));
+        menuCustomers.setOnMouseClicked(event -> changePane(customersPane));
 
-        menuItems.setOnMouseClicked(event -> changePane(itemsPane, itemsFxmlLoader.getController()));
+        menuItems.setOnMouseClicked(event -> changePane(itemsPane));
 
-        menuStocks.setOnMouseClicked(event -> changePane(stocksPane, stocksFxmlLoader.getController()));
+        menuStocks.setOnMouseClicked(event -> changePane(stocksPane));
 
-        menuFinancial.setOnMouseClicked(event -> changePane(financialPane, financialFxmlLoader.getController()));
+        menuFinancial.setOnMouseClicked(event -> changePane(financialPane));
 
         btnMinimize.setOnMouseClicked(e -> ((Stage) btnMinimize.getScene().getWindow()).setIconified(true));
 
     }
 
-    private void changePane(AnchorPane pane, Controller controller) {
+    private void changePane(AnchorPane pane) {
         if (!panesContainer.getChildren().contains(pane)) {
-            controller.setParentController(DashboardController.this);
             panesContainer.getChildren().add(pane);
             FadeIn animation = new FadeIn(pane);
             animation.setSpeed(3);
             animation.getTimeline().setOnFinished(e -> {
-                if (panesContainer.getChildren().size() > 1) panesContainer.getChildren().remove(0);
+                if (panesContainer.getChildren().size() > 1) panesContainer.getChildren().remove(currentPane);
+                currentPane = pane;
             });
             animation.play();
 
+        } else {
+            System.out.println("already there");
         }
     }
 
-    @Override
-    public void setParentController(Controller controller) {
-
-    }
-
-    @Override
-    public Controller getParentController() {
-        return null;
-    }
-
-    public AnchorPane getCustomersPane() {
-        return customersPane;
-    }
 }
