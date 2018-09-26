@@ -2,8 +2,10 @@
 a simple system with customers and stock managements
 
 ---
->`mongodb`
+* `mongodb`
 
->`java`
+* `java`
 
->`javafx`
+* `javafx`
+
+<kbd>,,l,,</kbd>
