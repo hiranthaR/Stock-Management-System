@@ -1,0 +1,26 @@
+
+.new-customer-buttons {
+    -fx-pref-width: 120px;
+    -fx-pref-height: 38px;
+    -fx-font-family: "Noto Mono";
+    -fx-font-size: 15px;
+}
+
+.save {
+    -fx-background-color: #5dacff;
+}
+
+.save:hover {
+    -fx-background-color: #84e2ff;
+
+}
+
+.cancel {
+    -fx-background-color: #f96352;
+    -fx-pref-width: 130px;
+}
+
+.cancel:hover {
+    -fx-background-color: #ffcf8d;
+}
+

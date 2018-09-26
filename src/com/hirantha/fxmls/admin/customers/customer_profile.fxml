@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="720.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.hirantha.controllers.admin.customers.CustomerProfileController">
@@ -24,7 +23,8 @@
                       AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                       AnchorPane.topAnchor="0.0">
                     <children>
-                        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imgProfilePhote" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true"
+                                   preserveRatio="true">
                             <VBox.margin>
                                 <Insets bottom="10.0" top="20.0"/>
                             </VBox.margin>
@@ -32,7 +32,7 @@
                                 <Image url="@../../../icons/man.png"/>
                             </image>
                         </ImageView>
-                        <Label text="Mr.Hirantha Rathnayake">
+                        <Label fx:id="tvName" text="Mr.Hirantha Rathnayake">
                             <font>
                                 <Font size="27.0"/>
                             </font>
@@ -60,7 +60,7 @@
                                         <Font name="Lato Regular" size="17.0"/>
                                     </font>
                                 </Label>
-                                <Label text="cs1202">
+                                <Label fx:id="tvId" text="cs1202">
                                     <font>
                                         <Font name="Noto Mono" size="17.0"/>
                                     </font>
@@ -91,7 +91,7 @@
                                         <Font name="Lato Regular" size="17.0"/>
                                     </font>
                                 </Label>
-                                <Label text="1">
+                                <Label fx:id="tvRank" text="1">
                                     <font>
                                         <Font name="Noto Mono" size="17.0"/>
                                     </font>
@@ -122,7 +122,7 @@
                                         <Font name="Lato Regular" size="17.0"/>
                                     </font>
                                 </Label>
-                                <Label text="Ginipenda,Kalugamuwa.">
+                                <Label fx:id="tvAddress" text="Ginipenda,Kalugamuwa.">
                                     <font>
                                         <Font name="Noto Mono" size="17.0"/>
                                     </font>
@@ -153,7 +153,7 @@
                                         <Font name="Lato Regular" size="17.0"/>
                                     </font>
                                 </Label>
-                                <Label text="0702693523">
+                                <Label fx:id="tvTelephone" text="0702693523">
                                     <font>
                                         <Font name="Noto Mono" size="17.0"/>
                                     </font>

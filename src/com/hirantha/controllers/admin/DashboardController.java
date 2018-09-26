@@ -1,7 +1,6 @@
 package com.hirantha.controllers.admin;
 
 import animatefx.animation.FadeIn;
-import com.hirantha.models.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -60,7 +59,7 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
-            FXMLLoader customersFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/costomers/customers.fxml"));
+            FXMLLoader customersFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/customers/customers.fxml"));
             FXMLLoader itemsFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/items.fxml"));
             FXMLLoader stocksFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/stocks.fxml"));
             FXMLLoader financialFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/financial.fxml"));

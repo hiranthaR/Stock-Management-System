@@ -9,5 +9,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="org.webjars:font-awesome:5.3.1" level="project" />
     <orderEntry type="library" name="io.github.typhon0:AnimateFX:1.2.0" level="project" />
+    <orderEntry type="library" name="org.mongodb:mongo-java-driver:3.8.2" level="project" />
+    <orderEntry type="library" name="org.apache.commons:commons-lang3:3.8.1" level="project" />
+    <orderEntry type="library" name="com.google.code.gson:gson:2.8.5" level="project" />
   </component>
 </module>
