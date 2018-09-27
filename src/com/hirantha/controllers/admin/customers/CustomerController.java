@@ -50,6 +50,7 @@ public class CustomerController implements Initializable {
             //new customer view
             FXMLLoader newCustomerFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/customers/new_customer.fxml"));
             newCustomerPane = newCustomerFxmlLoader.load();
+            newCustomerFxmlLoader.<NewCustomerController>getController().setCustomerController(CustomerController.this);
 
             //add rows
             readRows();
@@ -87,12 +88,12 @@ public class CustomerController implements Initializable {
 
 //            slideOutRight.play();
 
-
         });
 
     }
 
     void readRows() throws IOException {
+        rowsContainer.getChildren().clear();
         List<Customer> customers = CustomerQueries.getInstance().getCustomers();
 
         for (Customer customer : customers) {

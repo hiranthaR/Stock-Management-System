@@ -10,8 +10,8 @@ public class Customer {
     private String telephone;
     private int rank;
 
-    private String womanUrl = "/com/hirantha/icons/woman.png";
-    private String manUrl = "/com/hirantha/icons/man.png";
+    public static String womanUrl = "/com/hirantha/icons/woman.png";
+    public static String manUrl = "/com/hirantha/icons/man.png";
 
 
     public Customer(String _id, boolean man, String title, String name, String address, String telephone, int rank) {

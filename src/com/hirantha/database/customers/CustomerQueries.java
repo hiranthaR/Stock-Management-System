@@ -48,18 +48,15 @@ public class CustomerQueries {
                 .append(ADDRESS, customer.getAddress())
                 .append(IMAGE_URL, customer.getImageUrl())
                 .append(TELEPHONE, customer.getTelephone());
-        customersMongoCollection.insertOne(customerDocument);
 
+        customersMongoCollection.insertOne(customerDocument);
     }
 
     public List<Customer> getCustomers() {
         List<Customer> customers = new ArrayList<>();
-        FindIterable<Document> customersResults = customersMongoCollection.find();
 
-        customersResults.iterator().forEachRemaining(document -> {
-            customers.add(gson.fromJson(document.toJson(), Customer.class));
-            System.out.println(document.toJson());
-        });
+        FindIterable<Document> customersResults = customersMongoCollection.find();
+        customersResults.iterator().forEachRemaining(document -> customers.add(gson.fromJson(document.toJson(), Customer.class)));
 
         return customers;
     }
