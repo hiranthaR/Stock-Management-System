@@ -1,18 +1,18 @@
-package com.hirantha.database.customers;
+package com.hirantha.database;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 
 import java.io.*;
 
-class Connection {
+public class Connection {
 
     private Connection() {
     }
 
     private static Connection instance;
 
-    static Connection getInstance() {
+    public static Connection getInstance() {
         if (instance == null) instance = new Connection();
         return instance;
     }

@@ -50,10 +50,13 @@ public class NewCustomerController implements Initializable {
     private Label btnCancel;
 
     private CustomerController customerController;
+    boolean goingToUpdate = false;
+    private Customer customer;
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        spinnerTitles.requestFocus();
 
         //button go back
         btnCancel.setOnMouseClicked(e -> goBack());
@@ -79,7 +82,12 @@ public class NewCustomerController implements Initializable {
         //save button
         btnSave.setOnMouseClicked(e -> {
             if (isCorrect()) {
-                CustomerQueries.getInstance().insertCustomer(createCustomer());
+                if (goingToUpdate) {
+                    CustomerQueries.getInstance().updateCustomer(createCustomer());
+                    goingToUpdate = false;
+                } else {
+                    CustomerQueries.getInstance().insertCustomer(createCustomer());
+                }
                 try {
                     customerController.readRows();
                 } catch (IOException e1) {
@@ -88,6 +96,7 @@ public class NewCustomerController implements Initializable {
                 goBack();
             }
         });
+
 
         spinnerTitles.valueProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue.equals("Mr.")) imgProfilePhoto.setImage(manImage);
@@ -124,14 +133,21 @@ public class NewCustomerController implements Initializable {
         String telephone = txtTelephone.getText();
         int rank = spinnerRank.getValue();
 
-        return new Customer("0", man, title, name, address, telephone, rank);
+        String id;
+        if (goingToUpdate) id = customer.getId();
+        else id = "0";
+
+        return new Customer(id, man, title, name, address, telephone, rank);
     }
 
     private void goBack() {
         FadeOut fadeOut = new FadeOut(btnCancel.getParent());
         fadeOut.setSpeed(3);
         fadeOut.play();
-        fadeOut.getTimeline().setOnFinished(ex -> ((StackPane) btnCancel.getParent().getParent()).getChildren().remove(btnCancel.getParent()));
+        fadeOut.getTimeline().setOnFinished(ex -> {
+            ((StackPane) btnCancel.getParent().getParent()).getChildren().remove(btnCancel.getParent());
+            clearFields();
+        });
         try {
             customerController.readRows();
         } catch (IOException e) {
@@ -139,7 +155,29 @@ public class NewCustomerController implements Initializable {
         }
     }
 
+    void initToUpdate(Customer customer) {
+        goingToUpdate = true;
+        this.customer = customer;
+        if (customer.getTitle().equals("Mr.")) imgProfilePhoto.setImage(manImage);
+        else imgProfilePhoto.setImage(womanImage);
+        txtName.setText(customer.getName());
+        txtAddress.setText(customer.getAddress());
+        spinnerRank.getValueFactory().setValue(customer.getRank());
+        spinnerTitles.getValueFactory().setValue(customer.getTitle());
+        txtTelephone.setText(customer.getTelephone());
+    }
+
+
     public void setCustomerController(CustomerController customerController) {
         this.customerController = customerController;
+    }
+
+    private void clearFields() {
+        imgProfilePhoto.setImage(manImage);
+        txtName.setText("");
+        txtAddress.setText("");
+        spinnerRank.getValueFactory().setValue(1);
+        spinnerTitles.getValueFactory().setValue("Mr.");
+        txtTelephone.setText("");
     }
 }

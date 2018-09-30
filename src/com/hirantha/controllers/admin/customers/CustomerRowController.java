@@ -43,7 +43,7 @@ public class CustomerRowController implements Initializable {
     public void init(Customer customer, CustomerProfileController customerProfileController) {
         imgPhoto.setImage(new Image(customer.getImageUrl()));
         tvAddress.setText(customer.getAddress());
-        tvName.setText(customer.getTitle() + ". " + customer.getName());
+        tvName.setText(customer.getTitle() + " " + customer.getName());
         tvId.setText(customer.getId());
         tvRank.setText(String.valueOf(customer.getRank()));
         this.customerProfileController = customerProfileController;

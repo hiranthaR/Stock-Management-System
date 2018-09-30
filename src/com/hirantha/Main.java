@@ -1,7 +1,5 @@
 package com.hirantha;
 
-import com.hirantha.database.customers.CustomerQueries;
-import com.hirantha.models.data.customer.Customer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

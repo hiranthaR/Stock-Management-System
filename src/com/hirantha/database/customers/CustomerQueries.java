@@ -1,10 +1,15 @@
 package com.hirantha.database.customers;
 
 import com.google.gson.Gson;
+import com.hirantha.database.Connection;
+import com.hirantha.database.meta.MetaQueries;
 import com.hirantha.models.data.customer.Customer;
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.result.UpdateResult;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
 
@@ -40,8 +45,9 @@ public class CustomerQueries {
 
 
     public void insertCustomer(Customer customer) {
-
-        Document customerDocument = new Document(ID, "cus" + StringUtils.leftPad(String.valueOf(customersMongoCollection.count()), 4, "0"))
+        int id = MetaQueries.getInstance().getCustomerNextID();
+//        System.out.println(id);
+        Document customerDocument = new Document(ID, "c" + StringUtils.leftPad(String.valueOf(id), 4, "0"))
                 .append(TITLE, customer.getTitle())
                 .append(NAME, customer.getName())
                 .append(RANK, customer.getRank())
@@ -50,6 +56,21 @@ public class CustomerQueries {
                 .append(TELEPHONE, customer.getTelephone());
 
         customersMongoCollection.insertOne(customerDocument);
+    }
+
+    public void updateCustomer(Customer customer) {
+
+        BasicDBObject newDataDocument = new BasicDBObject("$set",
+                new BasicDBObject(TITLE, customer.getTitle())
+                        .append(NAME, customer.getName())
+                        .append(RANK, customer.getRank())
+                        .append(ADDRESS, customer.getAddress())
+                        .append(IMAGE_URL, customer.getImageUrl())
+                        .append(TELEPHONE, customer.getTelephone()));
+
+        UpdateResult result = customersMongoCollection.updateOne(Filters.eq(ID, customer.getId()), newDataDocument);
+        System.out.println(result.getModifiedCount());
+        System.out.println(result.getMatchedCount());
     }
 
     public List<Customer> getCustomers() {
@@ -61,4 +82,7 @@ public class CustomerQueries {
         return customers;
     }
 
+    public void deleteCustomer(Customer customer) {
+        customersMongoCollection.deleteOne(Filters.eq(ID, customer.getId()));
+    }
 }

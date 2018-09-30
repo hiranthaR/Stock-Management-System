@@ -168,7 +168,7 @@
                         </HBox>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                             <children>
-                                <Label alignment="CENTER" layoutX="281.0" layoutY="62.0"
+                                <Label fx:id="btnEdit" alignment="CENTER" layoutX="281.0" layoutY="62.0"
                                        stylesheets="@../../../css/admin/dashboard/customers/customer_profile.css"
                                        text="edit">
                                     <styleClass>
@@ -176,7 +176,7 @@
                                         <String fx:value="edit"/>
                                     </styleClass>
                                 </Label>
-                                <Label alignment="CENTER" layoutX="438.0" layoutY="62.0"
+                                <Label fx:id="btnDelete" alignment="CENTER" layoutX="438.0" layoutY="62.0"
                                        stylesheets="@../../../css/admin/dashboard/customers/customer_profile.css"
                                        text="Delete">
                                     <styleClass>
