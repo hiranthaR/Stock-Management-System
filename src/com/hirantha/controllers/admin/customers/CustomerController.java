@@ -2,6 +2,7 @@ package com.hirantha.controllers.admin.customers;
 
 import animatefx.animation.FadeIn;
 import com.hirantha.database.customers.CustomerQueries;
+import com.hirantha.fxmls.FXMLS;
 import com.hirantha.models.data.customer.Customer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +17,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListResourceBundle;
 import java.util.ResourceBundle;
 
 public class CustomerController implements Initializable {
@@ -51,14 +51,14 @@ public class CustomerController implements Initializable {
         try {
 
             //load and get the controller for profile showing pane
-            FXMLLoader profileFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/customers/customer_profile.fxml"));
+            FXMLLoader profileFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Customers.CUSTOMER_PROFILE));
             profilePane = profileFxmlLoader.load();
             profileContainer.getChildren().add(profilePane);
             customerProfileController = profileFxmlLoader.getController();
             customerProfileController.setCustomerController(CustomerController.this);
 
             //new customer view
-            FXMLLoader newCustomerFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/customers/new_customer.fxml"));
+            FXMLLoader newCustomerFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Customers.NEW_CUSTOMER));
             newCustomerPane = newCustomerFxmlLoader.load();
             newCustomerController = newCustomerFxmlLoader.getController();
             newCustomerController.setCustomerController(CustomerController.this);
@@ -105,10 +105,10 @@ public class CustomerController implements Initializable {
         return customers;
     }
 
-    void setRowViews(List<Customer> customers) throws IOException {
+    private void setRowViews(List<Customer> customers) throws IOException {
         rowsContainer.getChildren().clear();
         for (Customer customer : customers) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/customers/customer_row.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Customers.CUSTOMER_ROW));
             AnchorPane row = fxmlLoader.load();
             fxmlLoader.<CustomerRowController>getController().init(customer, customerProfileController);
             rowsContainer.getChildren().add(row);
@@ -123,7 +123,7 @@ public class CustomerController implements Initializable {
         }
     }
 
-    void showNewCustomer() {
+    private void showNewCustomer() {
         if (!((StackPane) basePane.getParent()).getChildren().contains(newCustomerPane)) {
             ((StackPane) basePane.getParent()).getChildren().add(newCustomerPane);
         }
