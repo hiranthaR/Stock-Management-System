@@ -18,10 +18,14 @@ public class ItemsController implements Initializable {
     private VBox rowsContainer;
 
     @FXML
+    private AnchorPane itemContainer;
+    @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Items.ITEM_ROW));
+        FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource(FXMLS.Admin.Items.ITEM_FULL_VIEW));
         try {
             rowsContainer.getChildren().add(fxmlLoader.load());
+            itemContainer.getChildren().add(fxmlLoader1.load());
 
         } catch (IOException e) {
             e.printStackTrace();

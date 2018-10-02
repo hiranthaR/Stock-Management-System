@@ -77,6 +77,7 @@ public class CustomerQueries {
         List<Customer> customers = new ArrayList<>();
 
         FindIterable<Document> customersResults = customersMongoCollection.find();
+        customersResults.sort(new BasicDBObject(NAME, 1));
         customersResults.iterator().forEachRemaining(document -> customers.add(gson.fromJson(document.toJson(), Customer.class)));
 
         return customers;

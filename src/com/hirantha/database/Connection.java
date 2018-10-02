@@ -9,7 +9,7 @@ public class Connection {
 
     private Connection() {
     }
-
+    
     private static Connection instance;
 
     public static Connection getInstance() {
@@ -22,7 +22,8 @@ public class Connection {
         File configFile = new File("./config.config");
         try {
             BufferedReader reader = new BufferedReader(new FileReader(configFile));
-            MongoClient client = new MongoClient(reader.readLine());
+            String ip = reader.readLine();
+            MongoClient client = new MongoClient(ip.isEmpty() ? "127.0.0.1" : ip);
             db = client.getDatabase("stock-management-db");
         } catch (IOException e) {
             System.out.println(e.getMessage());

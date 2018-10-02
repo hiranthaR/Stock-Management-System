@@ -9,11 +9,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="80.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/8.0.171"
+<AnchorPane minHeight="80.0" prefHeight="80.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/8.0.171"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.hirantha.controllers.admin.customers.CustomerRowController">
     <children>
-        <AnchorPane fx:id="customerRow" prefHeight="80.0" prefWidth="590.0" styleClass="customer-row-layout"
+        <AnchorPane fx:id="customerRow" minHeight="80.0" prefHeight="80.0" prefWidth="590.0"
+                    styleClass="customer-row-layout"
                     stylesheets="@../../../css/admin/dashboard/customers/customer_row.css" AnchorPane.bottomAnchor="0.0"
                     AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>

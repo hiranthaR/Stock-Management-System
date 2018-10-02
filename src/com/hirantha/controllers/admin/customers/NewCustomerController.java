@@ -3,8 +3,6 @@ package com.hirantha.controllers.admin.customers;
 import animatefx.animation.FadeOut;
 import com.hirantha.database.customers.CustomerQueries;
 import com.hirantha.models.data.customer.Customer;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
