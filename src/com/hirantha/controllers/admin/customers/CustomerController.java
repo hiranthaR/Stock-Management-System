@@ -7,7 +7,7 @@ import com.hirantha.models.data.customer.Customer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -23,8 +23,6 @@ public class CustomerController implements Initializable {
 
 
     public AnchorPane basePane;
-    @FXML
-    private Button btnBtn;
 
     @FXML
     private VBox rowsContainer;
@@ -36,7 +34,7 @@ public class CustomerController implements Initializable {
     private TextField txtSearch;
 
     @FXML
-    private Button btnNewCustomer;
+    private Label btnNewCustomer;
 
     private List<Customer> customers;
 
@@ -80,17 +78,6 @@ public class CustomerController implements Initializable {
                 if (txtSearch.getText().isEmpty()) readRows();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-        });
-
-        btnBtn.setOnMouseClicked(e -> {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/customers/customer_row.fxml"));
-                AnchorPane row = fxmlLoader.load();
-                fxmlLoader.<CustomerRowController>getController().init(new Customer("cs1222", true, "Mr", "Hirantha Rathnayake", "ginipenda,Kalugamuwa.", "0716203812", 1), customerProfileController);
-                rowsContainer.getChildren().add(row);
-            } catch (IOException e1) {
-                e1.printStackTrace();
             }
         });
 

@@ -6,19 +6,16 @@ import com.hirantha.models.data.customer.Customer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import org.apache.commons.lang3.text.WordUtils;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class NewCustomerController implements Initializable {
@@ -72,6 +69,10 @@ public class NewCustomerController implements Initializable {
             if (!(Character.isAlphabetic(e.getCharacter().charAt(0)) || Character.isSpaceChar(e.getCharacter().charAt(0))))
                 e.consume();
         });
+
+        //setting name,address in capital letters
+        txtName.textProperty().addListener((observableValue, s, t1) -> txtName.setText(WordUtils.capitalize(t1)));
+        txtAddress.textProperty().addListener((observableValue, s, t1) -> txtAddress.setText(WordUtils.capitalize(t1)));
 
         //setting up rank values
         spinnerRank.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 3, 1));
@@ -168,7 +169,7 @@ public class NewCustomerController implements Initializable {
     }
 
 
-    public void setCustomerController(CustomerController customerController) {
+    void setCustomerController(CustomerController customerController) {
         this.customerController = customerController;
     }
 

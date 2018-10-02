@@ -1,6 +1,7 @@
 package com.hirantha.controllers.admin;
 
 import animatefx.animation.FadeIn;
+import com.hirantha.fxmls.FXMLS;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -59,10 +60,10 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
-            FXMLLoader customersFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/customers/customers.fxml"));
-            FXMLLoader itemsFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/items.fxml"));
-            FXMLLoader stocksFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/stocks.fxml"));
-            FXMLLoader financialFxmlLoader = new FXMLLoader(getClass().getResource("/com/hirantha/fxmls/admin/financial.fxml"));
+            FXMLLoader customersFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Customers.CUSTOMER_DASHBOARD));
+            FXMLLoader itemsFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Items.ITEMS_DASHBOARD));
+            FXMLLoader stocksFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Stocks.STOCKS_DASHBOARD));
+            FXMLLoader financialFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Financial.FINANCIAL_DASHBOARD));
 
             customersPane = customersFxmlLoader.load();
             itemsPane = itemsFxmlLoader.load();
@@ -111,8 +112,6 @@ public class DashboardController implements Initializable {
             });
             animation.play();
 
-        } else {
-            System.out.println("already there");
         }
     }
 
