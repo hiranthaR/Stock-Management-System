@@ -15,6 +15,7 @@ public class FXMLS {
             public static String ITEMS_DASHBOARD = "/com/hirantha/fxmls/admin/items/items.fxml";
             public static String ITEM_ROW = "/com/hirantha/fxmls/admin/items/item_row.fxml";
             public static String ITEM_FULL_VIEW = "/com/hirantha/fxmls/admin/items/item_full_view.fxml";
+            public static String NEW_ITEM_VIEW = "/com/hirantha/fxmls/admin/items/new_item.fxml";
         }
 
         public static class Stocks {

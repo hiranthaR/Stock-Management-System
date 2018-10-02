@@ -1,14 +1,373 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.hirantha.controllers.admin.items.NewItemController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="840.0" prefWidth="1357.0" style="-fx-background-color: #cecece;"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.hirantha.controllers.admin.items.NewItemController">
+   <children>
+      <Label fx:id="btnCancel" alignment="CENTER" layoutX="31.0" layoutY="28.0" prefWidth="145.0"
+             stylesheets="@../../../css/admin/dashboard/customers/new_customer.css" text="Go Back">
+         <styleClass>
+            <String fx:value="cancel"/>
+            <String fx:value="new-customer-buttons"/>
+         </styleClass>
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../icons/back.png"/>
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <AnchorPane layoutX="379.0" layoutY="60.0" prefHeight="720.0" prefWidth="600.0">
+         <children>
+            <AnchorPane styleClass="customer-profile-layout"
+                        stylesheets="@../../../css/admin/dashboard/customers/customer_profile.css"
+                        AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                        AnchorPane.topAnchor="0.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0"
+                        AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                        AnchorPane.topAnchor="0.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../icons/bolt.png"/>
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="30.0"/>
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label text="Item name">
+                                 <HBox.margin>
+                                    <Insets left="10.0"/>
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Lato Regular" size="27.0"/>
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="25.0" right="25.0" top="5.0"/>
+                           </padding>
+                        </HBox>
+                        <AnchorPane minHeight="1.0" prefHeight="1.0" prefWidth="200.0"
+                                    style="-fx-background-color: #cecece;">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="20.0" right="20.0"/>
+                           </VBox.margin>
+                        </AnchorPane>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../icons/backend.png"/>
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="30.0"/>
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label prefWidth="140.0" text="Category" textFill="#6b6b6b">
+                                 <HBox.margin>
+                                    <Insets left="10.0"/>
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Lato Regular" size="17.0"/>
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="cmbCategory" editable="true" prefWidth="250.0"
+                                        promptText="Select one or type new"/>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="25.0" right="25.0" top="5.0"/>
+                           </padding>
+                           <VBox.margin>
+                              <Insets top="5.0"/>
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../icons/ruler.png"/>
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="30.0"/>
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label prefWidth="140.0" text="Unit" textFill="#6b6b6b">
+                                 <HBox.margin>
+                                    <Insets left="10.0"/>
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Lato Regular" size="17.0"/>
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="cmbUnit" prefWidth="250.0"/>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="25.0" right="25.0" top="5.0"/>
+                           </padding>
+                           <VBox.margin>
+                              <Insets top="5.0"/>
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../icons/price-tag(3).png"/>
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="30.0"/>
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label prefWidth="140.0" text="Receipt Price " textFill="#6b6b6b">
+                                 <HBox.margin>
+                                    <Insets left="10.0"/>
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Lato Regular" size="17.0"/>
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtReceiptPrice" alignment="CENTER_RIGHT"/>
+                              <Label text="/=">
+                                 <HBox.margin>
+                                    <Insets left="5.0"/>
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="25.0" right="25.0" top="5.0"/>
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../icons/price-tag.png"/>
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="30.0"/>
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label prefWidth="140.0" text="Marked Price" textFill="#6b6b6b">
+                                 <HBox.margin>
+                                    <Insets left="10.0"/>
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Lato Regular" size="17.0"/>
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtMarkPrice" alignment="CENTER_RIGHT"/>
+                              <Label text="/=">
+                                 <HBox.margin>
+                                    <Insets left="5.0"/>
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="25.0" right="25.0" top="5.0"/>
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../icons/price-tag(1).png"/>
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="30.0"/>
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label prefWidth="140.0" text="Selling Price" textFill="#6b6b6b">
+                                 <HBox.margin>
+                                    <Insets left="10.0"/>
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Lato Regular" size="17.0"/>
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtSellingPrice" alignment="CENTER_RIGHT"/>
+                              <Label text="/=">
+                                 <HBox.margin>
+                                    <Insets left="5.0"/>
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="25.0" right="25.0" top="5.0"/>
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../icons/money_or_discount.png"/>
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="30.0"/>
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label prefWidth="140.0" text="Discount Type" textFill="#6b6b6b">
+                                 <HBox.margin>
+                                    <Insets left="10.0"/>
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Lato Regular" size="17.0"/>
+                                 </font>
+                              </Label>
+                              <RadioButton mnemonicParsing="false" selected="true" text="Amount">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="discount"/>
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton mnemonicParsing="false" text="Percentage" toggleGroup="$discount">
+                                 <HBox.margin>
+                                    <Insets left="60.0"/>
+                                 </HBox.margin>
+                              </RadioButton>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="25.0" right="25.0" top="5.0"/>
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../icons/discount.png"/>
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="30.0"/>
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label prefWidth="140.0" text="Discount Rank 1" textFill="#6b6b6b">
+                                 <HBox.margin>
+                                    <Insets left="10.0"/>
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Lato Regular" size="17.0"/>
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtDiscountRank1" alignment="CENTER_RIGHT"/>
+                              <Label text="/=">
+                                 <HBox.margin>
+                                    <Insets left="5.0"/>
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="25.0" right="25.0" top="5.0"/>
+                           </padding>
+                           <VBox.margin>
+                              <Insets top="5.0"/>
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../icons/discount.png"/>
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="30.0"/>
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label prefWidth="140.0" text="Discount Rank 2 " textFill="#6b6b6b">
+                                 <HBox.margin>
+                                    <Insets left="10.0"/>
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Lato Regular" size="17.0"/>
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtDiscountRank2" alignment="CENTER_RIGHT"/>
+                              <Label text="/=">
+                                 <HBox.margin>
+                                    <Insets left="5.0"/>
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="25.0" right="25.0" top="5.0"/>
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../icons/discount.png"/>
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="30.0"/>
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label prefWidth="140.0" text="Discount Rank 3 " textFill="#6b6b6b">
+                                 <HBox.margin>
+                                    <Insets left="10.0"/>
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Lato Regular" size="17.0"/>
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtDiscountRank3" alignment="CENTER_RIGHT"/>
+                              <Label text="/=">
+                                 <HBox.margin>
+                                    <Insets left="5.0"/>
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="25.0" right="25.0" top="5.0"/>
+                           </padding>
+                        </HBox>
+                        <AnchorPane prefWidth="200.0">
+                           <children>
+                              <Label fx:id="btnEdit" alignment="CENTER" layoutX="281.0"
+                                     stylesheets="@../../../css/admin/dashboard/customers/customer_profile.css"
+                                     text="edit">
+                                 <styleClass>
+                                    <String fx:value="customer-profile-button"/>
+                                    <String fx:value="edit"/>
+                                 </styleClass>
+                              </Label>
+                              <Label fx:id="btnDelete" alignment="CENTER" layoutX="438.0"
+                                     stylesheets="@../../../css/admin/dashboard/customers/customer_profile.css"
+                                     text="Delete">
+                                 <styleClass>
+                                    <String fx:value="customer-profile-button"/>
+                                    <String fx:value="delete"/>
+                                 </styleClass>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets top="30.0"/>
+               </padding>
+            </AnchorPane>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+         </padding>
+      </AnchorPane>
+   </children>
 </AnchorPane>
