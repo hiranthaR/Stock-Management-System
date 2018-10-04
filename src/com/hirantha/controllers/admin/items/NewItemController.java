@@ -1,5 +1,6 @@
 package com.hirantha.controllers.admin.items;
 
+import com.hirantha.database.items.ItemQueries;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -10,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import org.apache.commons.lang3.text.WordUtils;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -72,63 +74,44 @@ public class NewItemController implements Initializable {
     @FXML
     private Label btnDelete;
 
-    DecimalFormat decimalFormat = new DecimalFormat("#.00");
+    TextFormatter decimalFormatter;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        cmbCategory.setItems(FXCollections.observableArrayList("sex1", "sex2", "sex3"));
-
-        btnEdit.setOnMouseClicked(e -> System.out.println(cmbCategory.editorProperty().get().getText()));
-
-        txtDiscountRank1.setTextFormatter(new TextFormatter<>(change -> {
+        decimalFormatter = new TextFormatter<>(change -> {
             if (Pattern.compile("-?\\d*(\\.\\d{0,2})?").matcher(change.getControlNewText()).matches()) {
                 return change;
             } else {
                 return null;
             }
-        }));
+        });
 
-        txtDiscountRank2.setTextFormatter(new TextFormatter<>(change -> {
-            if (Pattern.compile("-?\\d*(\\.\\d{0,2})?").matcher(change.getControlNewText()).matches()) {
-                return change;
-            } else {
-                return null;
-            }
-        }));
+        cmbUnit.setItems(FXCollections.observableArrayList(ItemQueries.getInstance().getUnits()));
+        cmbCategory.setItems(FXCollections.observableArrayList(ItemQueries.getInstance().getCategories()));
 
-        txtDiscountRank3.setTextFormatter(new TextFormatter<>(change -> {
-            if (Pattern.compile("-?\\d*(\\.\\d{0,2})?").matcher(change.getControlNewText()).matches()) {
-                return change;
-            } else {
-                return null;
-            }
-        }));
+        txtDiscountRank1.setTextFormatter(decimalFormatter);
 
-        txtMarkPrice.setTextFormatter(new TextFormatter<>(change -> {
-            if (Pattern.compile("-?\\d*(\\.\\d{0,2})?").matcher(change.getControlNewText()).matches()) {
-                return change;
-            } else {
-                return null;
-            }
-        }));
+        txtDiscountRank2.setTextFormatter(decimalFormatter);
 
-        txtReceiptPrice.setTextFormatter(new TextFormatter<>(change -> {
-            if (Pattern.compile("-?\\d*(\\.\\d{0,2})?").matcher(change.getControlNewText()).matches()) {
-                return change;
-            } else {
-                return null;
-            }
-        }));
+        txtDiscountRank3.setTextFormatter(decimalFormatter);
 
-        txtSellingPrice.setTextFormatter(new TextFormatter<>(change -> {
-            if (Pattern.compile("-?\\d*(\\.\\d{0,2})?").matcher(change.getControlNewText()).matches()) {
-                return change;
-            } else {
-                return null;
-            }
-        }));
+        txtMarkPrice.setTextFormatter(decimalFormatter);
 
+        txtReceiptPrice.setTextFormatter(decimalFormatter);
+
+        txtSellingPrice.setTextFormatter(decimalFormatter);
+
+        cmbCategory.getEditor().textProperty().addListener((observableValue, s, t1) -> cmbCategory.getEditor().setText(WordUtils.capitalize(t1)));
+        cmbCategory.getEditor().setOnKeyTyped(e -> {
+            if (!(Character.isAlphabetic(e.getCharacter().charAt(0)) || Character.isSpaceChar(e.getCharacter().charAt(0))))
+                e.consume();
+        });
+
+        cmbUnit.getEditor().setOnKeyTyped(e -> {
+            if (!(Character.isAlphabetic(e.getCharacter().charAt(0))))
+                e.consume();
+        });
 
         //setting up radio buttons
         radioPercentage.setUserData(false);

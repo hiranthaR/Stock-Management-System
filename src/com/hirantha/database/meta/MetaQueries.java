@@ -6,8 +6,12 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
+import org.bson.types.ObjectId;
+
+import java.util.Arrays;
 
 public class MetaQueries {
 
@@ -27,6 +31,9 @@ public class MetaQueries {
 
     private String META_COLLECTION = "meta";
     private MongoCollection<Document> metaMongoCollection = db.getCollection(META_COLLECTION);
+
+    private String UNIT_DOCUMENT_ID = "units_meta";
+    private String UNITS = "units";
 
     private String ID = "_id";
 
@@ -50,6 +57,4 @@ public class MetaQueries {
         }
         return nextID;
     }
-
-
 }
