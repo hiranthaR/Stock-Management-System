@@ -67,7 +67,13 @@ public class ItemQueries {
         )).iterator();
 
         List<String> categories = new ArrayList<>();
-        categoriesFromDb.forEachRemaining(document -> categories.add(document.get("_id").toString()));
+
+        Document document = categoriesFromDb.next();
+        while (document != null) {
+            System.out.println(document.toJson());
+            categories.add(document.get("_id").toString());
+            document = categoriesFromDb.next();
+        }
         return categories;
     }
 }
