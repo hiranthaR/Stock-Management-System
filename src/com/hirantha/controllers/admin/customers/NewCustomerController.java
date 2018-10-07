@@ -127,8 +127,8 @@ public class NewCustomerController implements Initializable {
     private Customer createCustomer() {
         boolean man = spinnerTitles.getValue().equals("Mr.");
         String title = spinnerTitles.getValue();
-        String name = txtName.getText();
-        String address = txtAddress.getText();
+        String name = txtName.getText().trim();
+        String address = txtAddress.getText().trim();
         String telephone = txtTelephone.getText();
         int rank = spinnerRank.getValue();
 

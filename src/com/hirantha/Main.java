@@ -23,7 +23,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        ItemQueries.getInstance().insertItem(null);
+//        ItemQueries.getInstance().insertItem(null);
         launch(args);
     }
 }

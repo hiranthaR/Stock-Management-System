@@ -53,14 +53,15 @@
                                      <Insets left="30.0"/>
                                  </HBox.margin>
                               </ImageView>
-                              <Label text="Item name">
+                               <TextField fx:id="txtItemName" prefHeight="52.0" prefWidth="353.0"
+                                          promptText="Item Name">
+                                   <font>
+                                       <Font size="27.0"/>
+                                   </font>
                                  <HBox.margin>
-                                     <Insets left="10.0"/>
+                                     <Insets left="20.0"/>
                                  </HBox.margin>
-                                 <font>
-                                     <Font name="Lato Regular" size="27.0"/>
-                                 </font>
-                              </Label>
+                               </TextField>
                            </children>
                            <padding>
                                <Insets bottom="5.0" left="25.0" right="25.0" top="5.0"/>

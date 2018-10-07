@@ -46,7 +46,6 @@ public class CustomerQueries {
 
     public void insertCustomer(Customer customer) {
         int id = MetaQueries.getInstance().getCustomerNextID();
-//        System.out.println(id);
         Document customerDocument = new Document(ID, "c" + StringUtils.leftPad(String.valueOf(id), 4, "0"))
                 .append(TITLE, customer.getTitle())
                 .append(NAME, customer.getName())

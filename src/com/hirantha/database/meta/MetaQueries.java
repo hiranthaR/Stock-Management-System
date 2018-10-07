@@ -32,13 +32,14 @@ public class MetaQueries {
     private String META_COLLECTION = "meta";
     private MongoCollection<Document> metaMongoCollection = db.getCollection(META_COLLECTION);
 
-    private String UNIT_DOCUMENT_ID = "units_meta";
-    private String UNITS = "units";
 
     private String ID = "_id";
 
     private String CUSTOMER_DOCUMENT_ID = "customer_meta";
     private String NEXT_CUSTOMER_ID = "next_customer_id";
+
+    private String ITEM_DOCUMENT_ID = "item_meta";
+    private String NEXT_ITEM_ID = "next_item_id";
 
     public int getCustomerNextID() {
         int nextID;
@@ -54,6 +55,24 @@ public class MetaQueries {
             nextID = 0;
             metaMongoCollection.insertOne(new Document(ID, CUSTOMER_DOCUMENT_ID)
                     .append(NEXT_CUSTOMER_ID, 1));
+        }
+        return nextID;
+    }
+
+    public int getItemNextID() {
+        int nextID;
+        try {
+            Document customerDocument = metaMongoCollection.find(Filters.eq(ID, ITEM_DOCUMENT_ID)).first();
+
+            nextID = customerDocument.getInteger(NEXT_ITEM_ID);
+            metaMongoCollection.updateOne(Filters.eq(ID, ITEM_DOCUMENT_ID),
+                    new BasicDBObject("$set", new BasicDBObject(NEXT_ITEM_ID, nextID + 1)));
+
+        } catch (NullPointerException e) {
+            System.out.println("catch");
+            nextID = 0;
+            metaMongoCollection.insertOne(new Document(ID, ITEM_DOCUMENT_ID)
+                    .append(NEXT_ITEM_ID, 1));
         }
         return nextID;
     }

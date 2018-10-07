@@ -35,7 +35,7 @@
                                         <Font size="22.0"/>
                                     </font>
                                 </Label>
-                                <Label fx:id="tvAddress" text="item category" textFill="#7c7c7c">
+                                <Label fx:id="tvCategory" text="item category" textFill="#7c7c7c">
                                     <font>
                                         <Font size="14.0"/>
                                     </font>
