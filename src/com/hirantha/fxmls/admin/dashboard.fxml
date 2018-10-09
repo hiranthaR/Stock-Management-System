@@ -145,7 +145,7 @@
                                                                 </Label>
                                                             </children>
                                                             <VBox.margin>
-                                                                <Insets bottom="5.0"/>
+                                                                <Insets/>
                                                             </VBox.margin>
                                                         </HBox>
                                                         <HBox id="sex" fx:id="menuItems" alignment="CENTER_LEFT"
@@ -171,7 +171,7 @@
                                                                 </Label>
                                                             </children>
                                                             <VBox.margin>
-                                                                <Insets bottom="5.0"/>
+                                                                <Insets/>
                                                             </VBox.margin>
                                                         </HBox>
                                                         <HBox fx:id="menuStocks" alignment="CENTER_LEFT"
@@ -197,7 +197,7 @@
                                                                 </Label>
                                                             </children>
                                                             <VBox.margin>
-                                                                <Insets bottom="5.0"/>
+                                                                <Insets/>
                                                             </VBox.margin>
                                                         </HBox>
                                                         <HBox fx:id="menuFinancial" alignment="CENTER_LEFT"
@@ -223,8 +223,54 @@
                                                                 </Label>
                                                             </children>
                                                             <VBox.margin>
-                                                                <Insets bottom="5.0"/>
+                                                                <Insets/>
                                                             </VBox.margin>
+                                                        </HBox>
+                                                        <HBox fx:id="menuFinancial1" alignment="CENTER_LEFT"
+                                                              prefWidth="200.0" styleClass="admin-menu-item"
+                                                              stylesheets="@../../css/admin/dashboard/admincss.css">
+                                                            <children>
+                                                                <ImageView fitHeight="60.0" fitWidth="60.0"
+                                                                           pickOnBounds="true" preserveRatio="true">
+                                                                    <HBox.margin>
+                                                                        <Insets bottom="10.0" left="10.0" right="10.0"
+                                                                                top="10.0"/>
+                                                                    </HBox.margin>
+                                                                    <image>
+                                                                        <Image url="@../../icons/bill.png"/>
+                                                                    </image>
+                                                                </ImageView>
+                                                                <Label styleClass="admin-menu-item-title"
+                                                                       stylesheets="@../../css/admin/dashboard/admincss.css"
+                                                                       text="Outputs" textFill="WHITE">
+                                                                    <font>
+                                                                        <Font name="Noto Mono" size="20.0"/>
+                                                                    </font>
+                                                                </Label>
+                                                            </children>
+                                                        </HBox>
+                                                        <HBox fx:id="menuIncome" alignment="CENTER_LEFT"
+                                                              prefWidth="200.0" styleClass="admin-menu-item"
+                                                              stylesheets="@../../css/admin/dashboard/admincss.css">
+                                                            <children>
+                                                                <ImageView fitHeight="60.0" fitWidth="60.0"
+                                                                           pickOnBounds="true" preserveRatio="true">
+                                                                    <HBox.margin>
+                                                                        <Insets bottom="10.0" left="10.0" right="10.0"
+                                                                                top="10.0"/>
+                                                                    </HBox.margin>
+                                                                    <image>
+                                                                        <Image url="@../../icons/trolley.png"/>
+                                                                    </image>
+                                                                </ImageView>
+                                                                <Label styleClass="admin-menu-item-title"
+                                                                       stylesheets="@../../css/admin/dashboard/admincss.css"
+                                                                       text="Income stocks" textFill="WHITE">
+                                                                    <font>
+                                                                        <Font name="Noto Mono" size="20.0"/>
+                                                                    </font>
+                                                                </Label>
+                                                            </children>
                                                         </HBox>
                                                     </children>
                                                     <padding>
