@@ -37,7 +37,7 @@ public class CustomerController implements Initializable {
     private Label btnNewCustomer;
 
     private List<Customer> customers;
-
+    List<Customer> temp = new ArrayList<>();
 
     private AnchorPane newCustomerPane;
     private AnchorPane profilePane;
@@ -70,9 +70,9 @@ public class CustomerController implements Initializable {
 
         txtSearch.setOnKeyReleased(keyEvent -> {
 
-            List<Customer> temp = new ArrayList<>();
+            temp.clear();
             for (Customer customer : customers)
-                if (customer.getName().contains(txtSearch.getText())) temp.add(customer);
+                if (customer.getName().toLowerCase().contains(txtSearch.getText().toLowerCase())) temp.add(customer);
             try {
                 setRowViews(temp);
                 if (txtSearch.getText().isEmpty()) readRows();

@@ -80,6 +80,8 @@ public class NewItemController implements Initializable {
     private Label btnSave;
 
     private ItemsController itemsController;
+    private Item item;
+    private boolean goingToUpdate = false;
 
 
     @Override
@@ -170,12 +172,24 @@ public class NewItemController implements Initializable {
 
         btnSave.setOnMouseClicked(e -> {
             if (valid()) {
-                ItemQueries.getInstance().insertItem(createItem());
+                if (goingToUpdate) {
+                    ItemQueries.getInstance().updateItem(createItem());
+                    goingToUpdate = false;
+                } else {
+                    ItemQueries.getInstance().insertItem(createItem());
+                }
+                try {
+                    itemsController.readRows();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                goBack();
             }
         });
 
         btnCancel.setOnMouseClicked(e -> goBack());
 
+        txtItemName.requestFocus();
     }
 
     public void loadUnitsAndCategories() {
@@ -196,7 +210,12 @@ public class NewItemController implements Initializable {
         double discountRank3 = Double.parseDouble(txtDiscountRank3.getText());
         boolean percentage = (boolean) discountToggleGroup.getSelectedToggle().getUserData();
 
-        return new Item("", name, category, unit, receiptPrice, markedPrice, sellingPrice, percentage, discountRank1, discountRank2, discountRank3);
+        String id;
+        if (goingToUpdate) id = item.getItemCode();
+        else id = "0";
+
+
+        return new Item(id, name, category, unit, receiptPrice, markedPrice, sellingPrice, percentage, discountRank1, discountRank2, discountRank3);
     }
 
     private boolean valid() {
@@ -228,7 +247,6 @@ public class NewItemController implements Initializable {
             status = false;
         }
 
-
         if (txtDiscountRank1.getText().isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Discount Rank 1 is empty!").showAndWait();
             status = false;
@@ -239,20 +257,18 @@ public class NewItemController implements Initializable {
             status = false;
         }
 
-
         if (txtDiscountRank3.getText().isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Discount Rank 3 is empty!").showAndWait();
             status = false;
         }
-
         return status;
     }
 
     private void clearFields() {
         txtItemName.setText("");
 
-        cmbCategory.getEditor().setText("");
-        cmbUnit.getEditor().setText("");
+        cmbCategory.valueProperty().set(null);
+        cmbUnit.valueProperty().set(null);
 
         txtSellingPrice.setText("");
         txtReceiptPrice.setText("");
@@ -284,5 +300,19 @@ public class NewItemController implements Initializable {
         }
     }
 
-
+    public void initToUpdate(Item item) {
+        this.goingToUpdate = true;
+        this.item = item;
+        txtItemName.setText(item.getName());
+        loadUnitsAndCategories();
+        cmbCategory.getEditor().setText(item.getCategory());
+        cmbUnit.getEditor().setText(item.getUnit());
+        txtReceiptPrice.setText(String.valueOf(item.getReceiptPrice()));
+        txtMarkPrice.setText(String.valueOf(item.getMarkedPrice()));
+        txtSellingPrice.setText(String.valueOf(item.getSellingPrice()));
+        discountToggleGroup.selectToggle(item.isPercentage() ? radioPercentage : radioAmount);
+        txtDiscountRank1.setText(String.valueOf(item.getRank1()));
+        txtDiscountRank2.setText(String.valueOf(item.getRank2()));
+        txtDiscountRank3.setText(String.valueOf(item.getRank3()));
+    }
 }

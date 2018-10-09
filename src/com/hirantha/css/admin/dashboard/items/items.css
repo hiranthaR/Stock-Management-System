@@ -5,3 +5,19 @@
 .scroll-pane {
     -fx-background-color: transparent;
 }
+
+.item-buttons {
+    -fx-pref-width: 120px;
+    -fx-pref-height: 38px;
+    -fx-font-family: "Noto Mono";
+    -fx-font-size: 15px;
+}
+
+.new-item {
+    -fx-background-color: #5dacff;
+}
+
+.new-item:hover {
+    -fx-background-color: #84e2ff;
+
+}

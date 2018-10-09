@@ -10,6 +10,8 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.result.UpdateResult;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
 
@@ -100,5 +102,30 @@ public class ItemQueries {
         itemsResults.iterator().forEachRemaining(document -> items.add(gson.fromJson(document.toJson(), Item.class)));
 
         return items;
+    }
+
+    public void deleteItem(Item item) {
+        itemsMongoCollection.deleteOne(Filters.eq(ID, item.getItemCode()));
+    }
+
+    public void updateItem(Item item) {
+
+        BasicDBObject newDataDocument = new BasicDBObject("$set",
+                new BasicDBObject(NAME, item.getName())
+                        .append(CATEGORY, item.getCategory())
+                        .append(UNIT, item.getUnit())
+                        .append(RECEIPT_PRICE, item.getReceiptPrice())
+                        .append(MARKED_PRICE, item.getMarkedPrice())
+                        .append(SELLING_PRICE, item.getSellingPrice())
+                        .append(PERCENTAGE, item.isPercentage())
+                        .append(RANK1, item.getRank1())
+                        .append(RANK2, item.getRank2())
+                        .append(RANK3, item.getRank3()));
+
+        System.out.println(item.getItemCode());
+
+        UpdateResult result = itemsMongoCollection.updateOne(Filters.eq(ID, item.getItemCode()), newDataDocument);
+        System.out.println(result.getMatchedCount());
+        System.out.println(result.getModifiedCount());
     }
 }

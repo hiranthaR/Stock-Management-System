@@ -49,6 +49,4 @@ public class CustomerRowController implements Initializable {
         this.customerProfileController = customerProfileController;
         this.customer = customer;
     }
-
-
 }

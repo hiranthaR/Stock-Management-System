@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.hirantha.controllers.admin.customers.CustomerProfileController">
+            fx:controller="com.hirantha.controllers.admin.items.ItemsFullViewController">
     <children>
         <AnchorPane styleClass="customer-profile-layout"
                     stylesheets="@../../../css/admin/dashboard/customers/customer_profile.css"
@@ -33,7 +33,7 @@
                                         <Insets left="30.0"/>
                                     </HBox.margin>
                                 </ImageView>
-                                <Label text="Item name">
+                                <Label fx:id="tvItemName" text="Item name">
                                     <HBox.margin>
                                         <Insets left="10.0"/>
                                     </HBox.margin>
@@ -70,7 +70,7 @@
                                         <Font name="Lato Regular" size="17.0"/>
                                     </font>
                                 </Label>
-                                <Label fx:id="tvId" text="cs1202">
+                                <Label fx:id="tvId" text="0000">
                                     <font>
                                         <Font name="Noto Mono" size="17.0"/>
                                     </font>
@@ -101,7 +101,7 @@
                                         <Font name="Lato Regular" size="17.0"/>
                                     </font>
                                 </Label>
-                                <Label fx:id="tvRank" text="Nuts and bolts">
+                                <Label fx:id="tvCategory" text="0000">
                                     <font>
                                         <Font name="Noto Mono" size="17.0"/>
                                     </font>
@@ -132,7 +132,7 @@
                                         <Font name="Lato Regular" size="17.0"/>
                                     </font>
                                 </Label>
-                                <Label fx:id="tvAddress" text="Kilo gram">
+                                <Label fx:id="tvUnit" text="0000">
                                     <font>
                                         <Font name="Noto Mono" size="17.0"/>
                                     </font>
@@ -163,7 +163,7 @@
                                         <Font name="Lato Regular" size="17.0"/>
                                     </font>
                                 </Label>
-                                <Label fx:id="tvAddress1" text="1200/=">
+                                <Label fx:id="tvReceiptPrice" text="00/=">
                                     <font>
                                         <Font name="Noto Mono" size="17.0"/>
                                     </font>
@@ -191,7 +191,7 @@
                                         <Font name="Lato Regular" size="17.0"/>
                                     </font>
                                 </Label>
-                                <Label fx:id="tvAddress3" text="13/=">
+                                <Label fx:id="tvMarkedPrice" text="00/=">
                                     <font>
                                         <Font name="Noto Mono" size="17.0"/>
                                     </font>
@@ -219,7 +219,7 @@
                                         <Font name="Lato Regular" size="17.0"/>
                                     </font>
                                 </Label>
-                                <Label fx:id="tvAddress2" text="14/=">
+                                <Label fx:id="tvSellingPrice" text="00/=">
                                     <font>
                                         <Font name="Noto Mono" size="17.0"/>
                                     </font>
@@ -247,7 +247,7 @@
                                         <Font name="Lato Regular" size="17.0"/>
                                     </font>
                                 </Label>
-                                <Label fx:id="tvTelephone" text="34%">
+                                <Label fx:id="tvDiscountRank1" text="0%">
                                     <font>
                                         <Font name="Noto Mono" size="17.0"/>
                                     </font>
@@ -278,7 +278,7 @@
                                         <Font name="Lato Regular" size="17.0"/>
                                     </font>
                                 </Label>
-                                <Label fx:id="tvTelephone1" text="34%">
+                                <Label fx:id="tvDiscountRank2" text="0%">
                                     <font>
                                         <Font name="Noto Mono" size="17.0"/>
                                     </font>
@@ -306,7 +306,7 @@
                                         <Font name="Lato Regular" size="17.0"/>
                                     </font>
                                 </Label>
-                                <Label fx:id="tvTelephone2" text="5%">
+                                <Label fx:id="tvDiscountRank3" text="0%">
                                     <font>
                                         <Font name="Noto Mono" size="17.0"/>
                                     </font>

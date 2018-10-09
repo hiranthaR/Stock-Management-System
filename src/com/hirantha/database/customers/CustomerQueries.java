@@ -67,9 +67,7 @@ public class CustomerQueries {
                         .append(IMAGE_URL, customer.getImageUrl())
                         .append(TELEPHONE, customer.getTelephone()));
 
-        UpdateResult result = customersMongoCollection.updateOne(Filters.eq(ID, customer.getId()), newDataDocument);
-        System.out.println(result.getModifiedCount());
-        System.out.println(result.getMatchedCount());
+        customersMongoCollection.updateOne(Filters.eq(ID, customer.getId()), newDataDocument);
     }
 
     public List<Customer> getCustomers() {

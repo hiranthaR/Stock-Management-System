@@ -166,7 +166,6 @@ public class NewCustomerController implements Initializable {
         txtTelephone.setText(customer.getTelephone());
     }
 
-
     void setCustomerController(CustomerController customerController) {
         this.customerController = customerController;
     }
