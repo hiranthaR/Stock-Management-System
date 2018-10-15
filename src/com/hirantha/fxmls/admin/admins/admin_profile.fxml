@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.hirantha.controllers.admin.customers.CustomerProfileController">
+    <children>
+        <AnchorPane styleClass="customer-profile-layout"
+                    stylesheets="@../../../css/admin/dashboard/customers/customer_profile.css"
+                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                    AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0"
+                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0">
+                    <children>
+                        <ImageView fx:id="imgProfilePhote" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <VBox.margin>
+                                <Insets bottom="10.0" top="20.0"/>
+                            </VBox.margin>
+                            <image>
+                                <Image url="@../../../icons/man.png"/>
+                            </image>
+                        </ImageView>
+                        <Label fx:id="tvName" text="Mr.Hirantha Rathnayake">
+                            <font>
+                                <Font size="27.0"/>
+                            </font>
+                        </Label>
+                        <AnchorPane minHeight="1.0" prefHeight="1.0" style="-fx-background-color: #cecece;">
+                            <VBox.margin>
+                                <Insets bottom="20.0" left="20.0" right="20.0"/>
+                            </VBox.margin>
+                        </AnchorPane>
+                        <HBox alignment="CENTER_LEFT">
+                            <children>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../icons/id-card.png"/>
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets left="30.0"/>
+                                    </HBox.margin>
+                                </ImageView>
+                                <Label prefWidth="120.0" text="Customer ID" textFill="#6b6b6b">
+                                    <HBox.margin>
+                                        <Insets left="10.0"/>
+                                    </HBox.margin>
+                                    <font>
+                                        <Font name="Lato Regular" size="17.0"/>
+                                    </font>
+                                </Label>
+                                <Label fx:id="tvId" text="cs1202">
+                                    <font>
+                                        <Font name="Noto Mono" size="17.0"/>
+                                    </font>
+                                </Label>
+                            </children>
+                            <padding>
+                                <Insets bottom="5.0" left="25.0" right="25.0" top="5.0"/>
+                            </padding>
+                            <VBox.margin>
+                                <Insets top="5.0"/>
+                            </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                            <children>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../icons/chevron.png"/>
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets left="30.0"/>
+                                    </HBox.margin>
+                                </ImageView>
+                                <Label prefWidth="120.0" text="Rank" textFill="#6b6b6b">
+                                    <HBox.margin>
+                                        <Insets left="10.0"/>
+                                    </HBox.margin>
+                                    <font>
+                                        <Font name="Lato Regular" size="17.0"/>
+                                    </font>
+                                </Label>
+                                <Label fx:id="tvRank" text="1">
+                                    <font>
+                                        <Font name="Noto Mono" size="17.0"/>
+                                    </font>
+                                </Label>
+                            </children>
+                            <padding>
+                                <Insets bottom="5.0" left="25.0" right="25.0" top="5.0"/>
+                            </padding>
+                            <VBox.margin>
+                                <Insets top="5.0"/>
+                            </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                            <children>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../icons/home-address.png"/>
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets left="30.0"/>
+                                    </HBox.margin>
+                                </ImageView>
+                                <Label prefWidth="120.0" text="Address" textFill="#6b6b6b">
+                                    <HBox.margin>
+                                        <Insets left="10.0"/>
+                                    </HBox.margin>
+                                    <font>
+                                        <Font name="Lato Regular" size="17.0"/>
+                                    </font>
+                                </Label>
+                                <Label fx:id="tvAddress" text="Ginipenda,Kalugamuwa.">
+                                    <font>
+                                        <Font name="Noto Mono" size="17.0"/>
+                                    </font>
+                                </Label>
+                            </children>
+                            <padding>
+                                <Insets bottom="5.0" left="25.0" right="25.0" top="5.0"/>
+                            </padding>
+                            <VBox.margin>
+                                <Insets top="5.0"/>
+                            </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                            <children>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../icons/telephone.png"/>
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets left="30.0"/>
+                                    </HBox.margin>
+                                </ImageView>
+                                <Label prefWidth="120.0" text="Telephone" textFill="#6b6b6b">
+                                    <HBox.margin>
+                                        <Insets left="10.0"/>
+                                    </HBox.margin>
+                                    <font>
+                                        <Font name="Lato Regular" size="17.0"/>
+                                    </font>
+                                </Label>
+                                <Label fx:id="tvTelephone" text="0702693523">
+                                    <font>
+                                        <Font name="Noto Mono" size="17.0"/>
+                                    </font>
+                                </Label>
+                            </children>
+                            <padding>
+                                <Insets bottom="5.0" left="25.0" right="25.0" top="5.0"/>
+                            </padding>
+                            <VBox.margin>
+                                <Insets top="5.0"/>
+                            </VBox.margin>
+                        </HBox>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                            <children>
+                                <Label fx:id="btnEdit" alignment="CENTER" layoutX="281.0" layoutY="62.0"
+                                       stylesheets="@../../../css/admin/dashboard/customers/customer_profile.css"
+                                       text="edit">
+                                    <styleClass>
+                                        <String fx:value="customer-profile-button"/>
+                                        <String fx:value="edit"/>
+                                    </styleClass>
+                                </Label>
+                                <Label fx:id="btnDelete" alignment="CENTER" layoutX="438.0" layoutY="62.0"
+                                       stylesheets="@../../../css/admin/dashboard/customers/customer_profile.css"
+                                       text="Delete">
+                                    <styleClass>
+                                        <String fx:value="customer-profile-button"/>
+                                        <String fx:value="delete"/>
+                                    </styleClass>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </VBox>
+            </children>
+            <padding>
+                <Insets top="30.0"/>
+            </padding>
+        </AnchorPane>
+    </children>
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+    </padding>
+</AnchorPane>

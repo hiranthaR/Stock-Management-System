@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="80.0" prefHeight="80.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.hirantha.controllers.admin.customers.CustomerRowController">
+    <children>
+        <AnchorPane fx:id="customerRow" minHeight="80.0" prefHeight="80.0" prefWidth="590.0"
+                    styleClass="customer-row-layout"
+                    stylesheets="@../../../css/admin/dashboard/customers/customer_row.css" AnchorPane.bottomAnchor="0.0"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <HBox alignment="CENTER_LEFT" layoutX="2.0" prefWidth="590.0" AnchorPane.bottomAnchor="0.0"
+                      AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <ImageView fx:id="imgPhoto" fitHeight="65.0" fitWidth="65.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@../../../icons/man.png"/>
+                            </image>
+                        </ImageView>
+                        <VBox alignment="CENTER_LEFT" prefHeight="78.0" prefWidth="414.0">
+                            <HBox.margin>
+                                <Insets left="10.0"/>
+                            </HBox.margin>
+                            <children>
+                                <Label fx:id="tvName">
+                                    <font>
+                                        <Font size="22.0"/>
+                                    </font>
+                                </Label>
+                                <Label fx:id="tvAddress" textFill="#7c7c7c">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets left="5.0"/>
+                                    </VBox.margin>
+                                </Label>
+                            </children>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </padding>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="78.0" prefWidth="90.0">
+                            <children>
+                                <Label fx:id="tvId" text="0000"/>
+                                <Label fx:id="tvRank" styleClass="customer-row-rank"
+                                       stylesheets="@../../../css/admin/dashboard/customers/customer_row.css" text="1"
+                                       textFill="WHITE">
+                                    <font>
+                                        <Font size="20.0"/>
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets top="7.0"/>
+                                    </VBox.margin>
+                                    <padding>
+                                        <Insets bottom="3.0" left="8.0" right="8.0" top="3.0"/>
+                                    </padding>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets left="10.0"/>
+                    </padding>
+                </HBox>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
