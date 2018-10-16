@@ -129,12 +129,24 @@ public class NewAdminController implements Initializable {
 
         boolean status = true;
 
+        boolean usernameExistence = false;
+        for (Admin admin : AdminQueries.getInstance().getAdmins()) {
+            if (admin.getUsername().equals(txtUsername.getText())) {
+                usernameExistence = true;
+                break;
+            }
+        }
+
         if (txtName.getText().isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Name is empty!").showAndWait();
             status = false;
         }
 
         //check username existence
+        if (usernameExistence) {
+            new Alert(Alert.AlertType.ERROR, "Username already Exist!").showAndWait();
+            status = false;
+        }
         if (txtUsername.getText().isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Username is empty!").showAndWait();
             status = false;

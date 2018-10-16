@@ -76,4 +76,5 @@ public class AdminQueries {
         adminsMongoCollection.deleteOne(Filters.eq(ID, admin.getId()));
     }
 
+
 }

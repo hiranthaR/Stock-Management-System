@@ -55,7 +55,7 @@ public class AdminsController implements Initializable {
             profilePane = profileFxmlLoader.load();
             profileContainer.getChildren().add(profilePane);
             adminProfileController = profileFxmlLoader.getController();
-//            adminProfileController.setCustomerController(CustomerController.this);
+            adminProfileController.setAdminsController(AdminsController.this);
 
 
             //new customer view
@@ -88,7 +88,7 @@ public class AdminsController implements Initializable {
         for (Admin admin : admins) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Admins.ADMIN_ROW));
             AnchorPane row = fxmlLoader.load();
-//            fxmlLoader.<AdminRowController>getController().init(customer, customerProfileController);
+            fxmlLoader.<AdminRowController>getController().init(admin, adminProfileController);
             rowsContainer.getChildren().add(row);
         }
 
@@ -97,7 +97,7 @@ public class AdminsController implements Initializable {
         } else {
             profileContainer.getChildren().clear();
             profileContainer.getChildren().add(profilePane);
-//            adminProfileController.init(admins.get(0));
+            adminProfileController.init(admins.get(0));
         }
     }
 
@@ -111,7 +111,7 @@ public class AdminsController implements Initializable {
         animation.play();
     }
 
-    void showUpdateCustomer(Admin admin) {
+    void showUpdateAdmin(Admin admin) {
         showNewCustomer();
         newAdminController.initToUpdate(admin);
     }
