@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.hirantha.controllers.admin.customers.CustomerProfileController">
+            fx:controller="com.hirantha.controllers.admin.admins.AdminProfileController">
     <children>
         <AnchorPane styleClass="customer-profile-layout"
                     stylesheets="@../../../css/admin/dashboard/customers/customer_profile.css"

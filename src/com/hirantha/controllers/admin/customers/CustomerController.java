@@ -86,7 +86,7 @@ public class CustomerController implements Initializable {
 
     List<Customer> readRows() throws IOException {
 
-        List<Customer> customers = CustomerQueries.getInstance().getCustomers();
+        customers = CustomerQueries.getInstance().getCustomers();
         setRowViews(customers);
 
         return customers;

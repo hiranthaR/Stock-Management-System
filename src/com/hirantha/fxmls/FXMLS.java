@@ -30,6 +30,13 @@ public class FXMLS {
         public static class Income {
             public static String INCOME_DASHBOARD = "/com/hirantha/fxmls/admin/income/income.fxml";
         }
+
+        public static class Admins {
+            public static String ADMIN_DASHBOARD = "/com/hirantha/fxmls/admin/admins/admins.fxml";
+            public static String NEW_ADMIN = "/com/hirantha/fxmls/admin/admins/new_admin.fxml";
+            public static String ADMIN_PROFILE = "/com/hirantha/fxmls/admin/admins/admin_profile.fxml";
+            public static String ADMIN_ROW = "/com/hirantha/fxmls/admin/admins/admin_row.fxml";
+        }
     }
 
 }

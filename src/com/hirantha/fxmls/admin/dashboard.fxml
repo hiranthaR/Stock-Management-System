@@ -272,7 +272,7 @@
                                                                 </Label>
                                                             </children>
                                                         </HBox>
-                                                        <HBox fx:id="menuIncome1" alignment="CENTER_LEFT"
+                                                        <HBox fx:id="menuAdmins" alignment="CENTER_LEFT"
                                                               prefWidth="200.0" styleClass="admin-menu-item"
                                                               stylesheets="@../../css/admin/dashboard/admincss.css">
                                                             <children>

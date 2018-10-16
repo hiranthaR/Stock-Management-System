@@ -1,6 +1,5 @@
 package com.hirantha;
 
-import com.hirantha.database.items.ItemQueries;
 import com.hirantha.fxmls.FXMLS;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,8 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import java.util.function.Consumer;
 
 public class Main extends Application {
 
@@ -23,7 +20,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-//        ItemQueries.getInstance().insertItem(null);
         launch(args);
     }
 }

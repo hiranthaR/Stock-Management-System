@@ -42,9 +42,8 @@ public class DashboardController implements Initializable {
     @FXML
     private HBox menuIncome;
 
-    public StackPane getPanesContainer() {
-        return panesContainer;
-    }
+    @FXML
+    private HBox menuAdmins;
 
     @FXML
     private StackPane panesContainer;
@@ -58,6 +57,7 @@ public class DashboardController implements Initializable {
     private AnchorPane financialPane;
     private AnchorPane currentPane;
     private AnchorPane incomePane;
+    private AnchorPane adminPane;
 
 
     @FXML
@@ -69,12 +69,14 @@ public class DashboardController implements Initializable {
             FXMLLoader stocksFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Stocks.STOCKS_DASHBOARD));
             FXMLLoader financialFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Financial.FINANCIAL_DASHBOARD));
             FXMLLoader incomeFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Income.INCOME_DASHBOARD));
+            FXMLLoader adminsFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Admins.ADMIN_DASHBOARD));
 
             customersPane = customersFxmlLoader.load();
             itemsPane = itemsFxmlLoader.load();
             stocksPane = stocksFxmlLoader.load();
             financialPane = financialFxmlLoader.load();
             incomePane = incomeFxmlLoader.load();
+            adminPane = adminsFxmlLoader.load();
 
             changePane(customersPane);
         } catch (IOException e) {
@@ -104,6 +106,7 @@ public class DashboardController implements Initializable {
         menuFinancial.setOnMouseClicked(event -> changePane(financialPane));
 
         menuIncome.setOnMouseClicked(event -> changePane(incomePane));
+        menuAdmins.setOnMouseClicked(event -> changePane(adminPane));
 
         btnMinimize.setOnMouseClicked(e -> ((Stage) btnMinimize.getScene().getWindow()).setIconified(true));
 

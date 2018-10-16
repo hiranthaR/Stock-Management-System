@@ -45,7 +45,7 @@ public class NewCustomerController implements Initializable {
     private Label btnCancel;
 
     private CustomerController customerController;
-    boolean goingToUpdate = false;
+    private boolean goingToUpdate = false;
     private Customer customer;
 
     @FXML
