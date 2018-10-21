@@ -42,7 +42,8 @@
                                                                 <Image url="@../../icons/settings.png"/>
                                                             </image>
                                                         </ImageView>
-                                                        <Label text="Dehannegama Hardware" textFill="#eee9e9">
+                                                        <Label fx:id="txtTitle" text="Dehannegama Hardware"
+                                                               textFill="#eee9e9">
                                                             <font>
                                                                 <Font name="Noto Mono" size="22.0"/>
                                                             </font>

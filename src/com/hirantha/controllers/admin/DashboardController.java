@@ -1,11 +1,13 @@
 package com.hirantha.controllers.admin;
 
 import animatefx.animation.FadeIn;
+import com.hirantha.admins.CurrentAdmin;
 import com.hirantha.fxmls.FXMLS;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -32,6 +34,9 @@ public class DashboardController implements Initializable {
 
     @FXML
     private HBox menuItems;
+
+    @FXML
+    private Label txtTitle;
 
     @FXML
     private HBox menuStocks;
@@ -62,6 +67,8 @@ public class DashboardController implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        txtTitle.setText(CurrentAdmin.getInstance().getCurrentAdmin().getName() + " @ Werellagama Hardware");
 
         try {
             FXMLLoader customersFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Customers.CUSTOMER_DASHBOARD));

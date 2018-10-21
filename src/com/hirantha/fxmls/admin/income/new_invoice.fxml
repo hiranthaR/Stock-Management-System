@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,7 +20,7 @@
 
 <AnchorPane prefHeight="840.0" prefWidth="1357.0" style="-fx-background-color: #cecece;"
             xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.hirantha.controllers.admin.items.NewItemController">
+            fx:controller="com.hirantha.controllers.admin.income.NewInvoiceController">
     <children>
         <Label fx:id="btnCancel" alignment="CENTER" layoutX="31.0" layoutY="28.0" prefWidth="145.0"
                stylesheets="@../../../css/admin/dashboard/customers/new_customer.css" text="Go Back">
@@ -333,19 +334,20 @@
                                                                 <Insets left="30.0" right="30.0"/>
                                                             </HBox.margin>
                                                         </Button>
-                                                        <Button mnemonicParsing="false" text="new Item">
+                                                        <Button fx:id="btnNewItem" mnemonicParsing="false"
+                                                                text="new Item">
                                                             <HBox.margin>
                                                                 <Insets left="30.0" right="30.0"/>
                                                             </HBox.margin>
                                                         </Button>
-                                                        <Button mnemonicParsing="false" text="Remove">
+                                                        <Button fx:id="btnRemove" mnemonicParsing="false" text="Remove">
                                                             <HBox.margin>
                                                                 <Insets left="30.0" right="30.0"/>
                                                             </HBox.margin>
                                                         </Button>
                                                     </children>
                                                 </HBox>
-                                                <TableView prefHeight="441.0" prefWidth="576.0">
+                                                <TableView fx:id="table" prefHeight="441.0" prefWidth="576.0">
                                                     <VBox.margin>
                                                         <Insets left="20.0" right="20.0" top="30.0"/>
                                                     </VBox.margin>
@@ -355,7 +357,7 @@
                                                         <TableColumn prefWidth="71.0" text="Unit"/>
                                                         <TableColumn editable="false" prefWidth="124.0"
                                                                      text="Cost per Item"/>
-                                                        <TableColumn prefWidth="109.0" text="Column X"/>
+                                                        <TableColumn prefWidth="109.0" text="Quantity"/>
                                                     </columns>
                                                 </TableView>
                                                 <HBox alignment="CENTER_LEFT">
@@ -378,7 +380,7 @@
                                                                 <Font name="Lato Regular" size="17.0"/>
                                                             </font>
                                                         </Label>
-                                                        <TextField prefWidth="150.0">
+                                                        <TextField fx:id="txtBillCost" prefWidth="150.0">
                                                             <HBox.margin>
                                                                 <Insets left="5.0"/>
                                                             </HBox.margin>
@@ -422,12 +424,17 @@
                                                                 <Insets left="5.0"/>
                                                             </HBox.margin>
                                                         </ImageView>
-                                                        <RadioButton mnemonicParsing="false" text="Cash">
+                                                        <RadioButton fx:id="radioCash" mnemonicParsing="false"
+                                                                     selected="true" text="Cash">
                                                             <HBox.margin>
                                                                 <Insets left="50.0"/>
                                                             </HBox.margin>
+                                                            <toggleGroup>
+                                                                <ToggleGroup fx:id="cashOrCheck"/>
+                                                            </toggleGroup>
                                                         </RadioButton>
-                                                        <RadioButton mnemonicParsing="false" text="Cheque">
+                                                        <RadioButton fx:id="radioCheque" mnemonicParsing="false"
+                                                                     text="Cheque" toggleGroup="$cashOrCheck">
                                                             <HBox.margin>
                                                                 <Insets left="50.0"/>
                                                             </HBox.margin>
@@ -462,7 +469,7 @@
                                                                 <Font name="Lato Regular" size="17.0"/>
                                                             </font>
                                                         </Label>
-                                                        <TextField/>
+                                                        <TextField fx:id="txtBank"/>
                                                     </children>
                                                     <padding>
                                                         <Insets bottom="5.0" top="5.0"/>
@@ -487,7 +494,7 @@
                                                                 <Font name="Lato Regular" size="17.0"/>
                                                             </font>
                                                         </Label>
-                                                        <TextField/>
+                                                        <TextField fx:id="txtBranch"/>
                                                     </children>
                                                     <padding>
                                                         <Insets bottom="5.0" top="5.0"/>
@@ -512,7 +519,7 @@
                                                                 <Font name="Lato Regular" size="17.0"/>
                                                             </font>
                                                         </Label>
-                                                        <DatePicker/>
+                                                        <DatePicker fx:id="dpChequeDate"/>
                                                     </children>
                                                     <padding>
                                                         <Insets bottom="5.0" top="5.0"/>
@@ -537,7 +544,7 @@
                                                                 <Font name="Lato Regular" size="17.0"/>
                                                             </font>
                                                         </Label>
-                                                        <TextField/>
+                                                        <TextField fx:id="txtAmount"/>
                                                     </children>
                                                     <padding>
                                                         <Insets bottom="5.0" top="5.0"/>
@@ -568,7 +575,7 @@
                                                                 <Font name="Lato Regular" size="17.0"/>
                                                             </font>
                                                         </Label>
-                                                        <ComboBox prefWidth="171.0"/>
+                                                        <ComboBox fx:id="cmbPrepared" prefWidth="171.0"/>
                                                     </children>
                                                     <padding>
                                                         <Insets bottom="5.0" top="5.0"/>
@@ -593,7 +600,7 @@
                                                                 <Font name="Lato Regular" size="17.0"/>
                                                             </font>
                                                         </Label>
-                                                        <ComboBox prefWidth="171.0"/>
+                                                        <ComboBox fx:id="cmbchecked" prefWidth="171.0"/>
                                                     </children>
                                                     <padding>
                                                         <Insets bottom="5.0" top="5.0"/>
@@ -618,7 +625,7 @@
                                                                 <Font name="Lato Regular" size="17.0"/>
                                                             </font>
                                                         </Label>
-                                                        <ComboBox prefWidth="171.0"/>
+                                                        <ComboBox fx:id="cmbAccepted" prefWidth="171.0"/>
                                                     </children>
                                                     <padding>
                                                         <Insets bottom="5.0" top="5.0"/>
@@ -629,7 +636,7 @@
                                                         <Insets bottom="5.0" top="5.0"/>
                                                     </padding>
                                                     <children>
-                                                        <Button mnemonicParsing="false" text="Save">
+                                                        <Button fx:id="btnSave" mnemonicParsing="false" text="Save">
                                                             <HBox.margin>
                                                                 <Insets right="44.0"/>
                                                             </HBox.margin>

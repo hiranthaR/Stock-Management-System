@@ -10,7 +10,8 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="80.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hirantha.controllers.admin.items.ItemRowController">
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.hirantha.controllers.admin.income.InvoiceRowController">
     <children>
         <AnchorPane fx:id="itemRow" prefHeight="80.0" prefWidth="590.0" styleClass="item-row-layout"
                     stylesheets="@../../../css/admin/dashboard/items/item_row.css" AnchorPane.bottomAnchor="0.0"

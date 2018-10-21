@@ -12,7 +12,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource(FXMLS.Admin.MAIN_DASHBOARD));
+        Parent root = FXMLLoader.load(getClass().getResource(FXMLS.Admin.LOGIN_DASHBOARD));
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setTitle("Werellagama Hardware");
         primaryStage.setScene(new Scene(root));

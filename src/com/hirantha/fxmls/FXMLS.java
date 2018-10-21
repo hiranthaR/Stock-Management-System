@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 public class FXMLS {
     public static class Admin {
         public static String MAIN_DASHBOARD = "/com/hirantha/fxmls/admin/dashboard.fxml";
+        public static String LOGIN_DASHBOARD = "/com/hirantha/fxmls/admin/auth/Login.fxml";
+
         public static class Customers {
             public static String CUSTOMER_PROFILE = "/com/hirantha/fxmls/admin/customers/customer_profile.fxml";
             public static String NEW_CUSTOMER = "/com/hirantha/fxmls/admin/customers/new_customer.fxml";
@@ -29,6 +31,7 @@ public class FXMLS {
 
         public static class Income {
             public static String INCOME_DASHBOARD = "/com/hirantha/fxmls/admin/income/income.fxml";
+            public static String NEW_INVOICE = "/com/hirantha/fxmls/admin/income/new_invoice.fxml";
         }
 
         public static class Admins {

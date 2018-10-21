@@ -1,4 +1,4 @@
-package com.hirantha.Admins;
+package com.hirantha.admins;
 
 import com.hirantha.models.data.admins.Admin;
 

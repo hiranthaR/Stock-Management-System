@@ -1,11 +1,9 @@
 package com.hirantha.controllers.admin.admins;
 
 import animatefx.animation.FadeOut;
-import com.hirantha.Admins.Permissions;
+import com.hirantha.admins.Permissions;
 import com.hirantha.database.admins.AdminQueries;
-import com.hirantha.database.customers.CustomerQueries;
 import com.hirantha.models.data.admins.Admin;
-import com.hirantha.models.data.customer.Customer;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -142,8 +140,8 @@ public class NewAdminController implements Initializable {
             status = false;
         }
 
-        //check username existence
-        if (usernameExistence) {
+        //check username existence if not going to update
+        if (!goingToUpdate && usernameExistence) {
             new Alert(Alert.AlertType.ERROR, "Username already Exist!").showAndWait();
             status = false;
         }
@@ -170,7 +168,7 @@ public class NewAdminController implements Initializable {
     private Admin createAdmin() {
 
         String name = txtName.getText();
-        String username = txtUsername.getText();
+        String username = txtUsername.getText().toLowerCase();
         String password = txtPassword.getText();
         int level = 0;
 
@@ -193,7 +191,11 @@ public class NewAdminController implements Initializable {
         if (chkCustomer.isSelected()) level += Permissions.ADD_CUSTOMER;
         if (chkItems.isSelected()) level += Permissions.ADD_ITEM;
 
-        return new Admin(new ObjectId(), name, username, password, level);
+        ObjectId id;
+        if (goingToUpdate) id = admin.getId();
+        else id = new ObjectId();
+
+        return new Admin(id, name, username, password, level);
     }
 
 

@@ -1,6 +1,6 @@
 package com.hirantha.controllers.admin.admins;
 
-import com.hirantha.Admins.Permissions;
+import com.hirantha.admins.Permissions;
 import com.hirantha.database.admins.AdminQueries;
 import com.hirantha.models.data.admins.Admin;
 import javafx.fxml.FXML;

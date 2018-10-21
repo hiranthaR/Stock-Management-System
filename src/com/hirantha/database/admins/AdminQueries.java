@@ -9,6 +9,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -59,7 +60,10 @@ public class AdminQueries {
                         .append(USERNAME, admin.getUsername())
                         .append(LEVEL, admin.getLevel()));
 
-        adminsMongoCollection.updateOne(Filters.eq(ID, admin.getId()), newDataDocument);
+        UpdateResult result = adminsMongoCollection.updateOne(Filters.eq(ID, admin.getId().toString()), newDataDocument);
+        System.out.println(result.getModifiedCount());
+        System.out.println(result.getMatchedCount());
+
     }
 
     public List<Admin> getAdmins() {

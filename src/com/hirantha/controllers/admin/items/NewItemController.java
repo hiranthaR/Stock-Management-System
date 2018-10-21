@@ -3,6 +3,7 @@ package com.hirantha.controllers.admin.items;
 import animatefx.animation.FadeOut;
 import com.hirantha.database.items.ItemQueries;
 import com.hirantha.models.data.item.Item;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -15,6 +16,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import org.apache.commons.lang3.text.WordUtils;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -88,6 +90,8 @@ public class NewItemController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         loadUnitsAndCategories();
+        TextFields.bindAutoCompletion(cmbCategory.getEditor(), cmbCategory.getItems());
+        TextFields.bindAutoCompletion(cmbUnit.getEditor(), cmbUnit.getItems());
 
         txtDiscountRank1.setTextFormatter(new TextFormatter<>(change -> {
             if (Pattern.compile("-?\\d*(\\.\\d{0,2})?").matcher(change.getControlNewText()).matches()) {
@@ -189,7 +193,7 @@ public class NewItemController implements Initializable {
 
         btnCancel.setOnMouseClicked(e -> goBack());
 
-        txtItemName.requestFocus();
+        Platform.runLater(() -> txtItemName.requestFocus());
     }
 
     public void loadUnitsAndCategories() {
