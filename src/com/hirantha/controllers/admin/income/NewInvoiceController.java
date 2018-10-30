@@ -142,6 +142,7 @@ public class NewInvoiceController implements Initializable {
     private Item selectedItem;
     private List<Admin> admins;
     private boolean goingToUpdate;
+    private Invoice invoice;
     private IncomeController incomeController;
     private List<Supplier> suppliers;
 
@@ -270,7 +271,18 @@ public class NewInvoiceController implements Initializable {
             }
         });
 
-        btnRemove.setOnMouseClicked(e -> table.getItems().remove(table.getSelectionModel().getSelectedIndex()));
+        btnRemove.setOnMouseClicked(e -> {
+            TableItem tableItem = table.getSelectionModel().getSelectedItem();
+            table.getItems().remove(table.getSelectionModel().getSelectedIndex());
+            if (txtBillCost.getText().isEmpty() || txtBillCost.getText().equals("0")) {
+                txtBillCost.setText(String.valueOf(tableItem.getCostPerItem() * tableItem.getQuantity()));
+            } else {
+                txtBillCost.setText(String.valueOf(Double.parseDouble(txtBillCost.getText()) - tableItem.getCostPerItem() * tableItem.getQuantity()));
+            }
+
+            if (Double.parseDouble(txtBillCost.getText()) < 0) txtBillCost.setText("0");
+
+        });
 
         if (!Permissions.checkPermission(CurrentAdmin.getInstance().getCurrentAdmin().getLevel(), Permissions.ADD_ITEM))
             btnNewItem.setVisible(false);
@@ -430,11 +442,11 @@ public class NewInvoiceController implements Initializable {
                 } else {
                     InvoiceQueries.getInstance().insertInvoice(createInvoice());
                 }
-//                try {
-//                    itemsController.readRows();
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();
-//                }
+                try {
+                    incomeController.readRows();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
                 goBack();
             }
         });
@@ -611,14 +623,15 @@ public class NewInvoiceController implements Initializable {
             ((StackPane) btnCancel.getParent().getParent()).getChildren().remove(btnCancel.getParent());
             clearFields();
         });
-//        try {
-//            itemsController.readRows();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            incomeController.readRows();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void initToUpdate(Invoice item) {
+    public void initToUpdate(Invoice invoice) {
+        this.invoice = invoice;
         this.goingToUpdate = true;
 
     }

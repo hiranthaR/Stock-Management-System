@@ -1,19 +1,25 @@
 package com.hirantha.database.invoice;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hirantha.database.Connection;
 import com.hirantha.database.meta.MetaQueries;
 import com.hirantha.models.data.invoice.Invoice;
 import com.hirantha.models.data.invoice.Supplier;
+import com.hirantha.models.data.item.Item;
+import com.hirantha.models.data.item.TableItem;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Projections;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class InvoiceQueries {
@@ -37,27 +43,27 @@ public class InvoiceQueries {
 
     private String INVOICE_ID = "_id";
     private String DATE = "date";
-    private String SUPPLIER_INVOICE_NUMBER = "supplier_invoice_number";
-    private String SUPPLIER_NAME = "supplier_name";
-    private String SUPPLIER_ADDRESS = "supplier_address";
-    private String ITEMS = "items";
-    private String ITEM_CODE = "item_code";
-    private String ITEM_NAME = "item_name";
-    private String ITEM_QUANTITY = "item_quantity";
-    private String COST_PER_ITEM = "cost_per_item";
-    private String ITEM_UNIT = "item_unit";
-    private String TOTAL_BILL_COST = "total_bill_cost";
+    private String SUPPLIER_INVOICE_NUMBER = "invoiceNumber";
+    private String SUPPLIER_NAME = "name";
+    private String SUPPLIER_ADDRESS = "address";
+    private String ITEMS = "tableItems";
+    private String TOTAL_BILL_COST = "billCost";
+    private String ITEM_CODE = "itemId";
+    private String ITEM_NAME = "name";
+    private String ITEM_QUANTITY = "quantity";
+    private String COST_PER_ITEM = "costPerItem";
+    private String ITEM_UNIT = "unit";
     private String CASH = "cash";
     private String BANK = "bank";
     private String BRANCH = "branch";
-    private String CHEQUE_DATE = "cheque_date";
+    private String CHEQUE_DATE = "chequeDate";
     private String AMOUNT = "amount";
-    private String PREPARED_ADMIN_NAME = "prepared_admin_name";
-    private String PREPARED_ADMIN_ID = "prepared_admin_id";
-    private String ACCEPTED_ADMIN_NAME = "accepted_admin_name";
-    private String ACCEPTED_ADMIN_ID = "accepted_admin_id";
-    private String CHECKED_ADMIN_NAME = "checked_admin_name";
-    private String CHECKED_ADMIN_ID = "checked_admin_id";
+    private String PREPARED_ADMIN_NAME = "preparedAdminName";
+    private String PREPARED_ADMIN_ID = "preparedAdminId";
+    private String ACCEPTED_ADMIN_NAME = "acceptedAdminName";
+    private String ACCEPTED_ADMIN_ID = "acceptedAdminId";
+    private String CHECKED_ADMIN_NAME = "checkedAdminName";
+    private String CHECKED_ADMIN_ID = "checkedAdminId";
 
 
     public void insertInvoice(Invoice invoice) {
@@ -102,5 +108,48 @@ public class InvoiceQueries {
         return suppliers;
     }
 
+    public List<Invoice> getInvoices() {
+        List<Invoice> invoices = new ArrayList<>();
+
+        FindIterable<Document> itemsResults = invoicesMongoCollection.find();
+        itemsResults.sort(new BasicDBObject(DATE, 1));
+        itemsResults.iterator().forEachRemaining(document -> {
+            invoices.add(createInvoice(document));
+        });
+
+        return invoices;
+    }
+
+    private Invoice createInvoice(Document document) {
+        String id = document.getString(INVOICE_ID);
+        Date date = document.getDate(DATE);
+        String invoiceNumber = document.getString(SUPPLIER_INVOICE_NUMBER);
+        String supplierName = document.getString(SUPPLIER_NAME);
+        String supplierAddress = document.getString(SUPPLIER_ADDRESS);
+        List<TableItem> tableItems = (ArrayList<TableItem>) document.get(ITEMS, new TypeToken<ArrayList<TableItem>>() {
+        }.getType());
+        double billCost = document.getDouble(TOTAL_BILL_COST);
+        boolean cash = document.getBoolean(CASH);
+
+        String bank = null, branch = null;
+        Date chequeDate = null;
+        double amount = 0;
+
+        if (!cash) {
+            bank = document.getString(BANK);
+            branch = document.getString(BRANCH);
+            chequeDate = document.getDate(CHEQUE_DATE);
+            amount = document.getDouble(AMOUNT);
+        }
+
+        String preparedAdminName = document.getString(PREPARED_ADMIN_NAME);
+        ObjectId preparedAdminId = document.getObjectId(PREPARED_ADMIN_ID);
+        String acceptedAdminName = document.getString(ACCEPTED_ADMIN_NAME);
+        ObjectId acceptedAdminId = document.getObjectId(ACCEPTED_ADMIN_ID);
+        String checkedAdminName = document.getString(CHECKED_ADMIN_NAME);
+        ObjectId checkedAdminId = document.getObjectId(CHECKED_ADMIN_ID);
+
+        return new Invoice(id, date, invoiceNumber, supplierName, supplierAddress, tableItems, billCost, cash, bank, branch, chequeDate, amount, preparedAdminName, preparedAdminId, checkedAdminName, checkedAdminId, acceptedAdminName, acceptedAdminId);
+    }
 
 }

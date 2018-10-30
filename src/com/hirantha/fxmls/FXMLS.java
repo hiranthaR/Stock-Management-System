@@ -32,6 +32,7 @@ public class FXMLS {
         public static class Income {
             public static String INCOME_DASHBOARD = "/com/hirantha/fxmls/admin/income/income.fxml";
             public static String NEW_INVOICE = "/com/hirantha/fxmls/admin/income/new_invoice.fxml";
+            public static String INVOICE_ROW = "/com/hirantha/fxmls/admin/income/invoice_row.fxml";
         }
 
         public static class Admins {

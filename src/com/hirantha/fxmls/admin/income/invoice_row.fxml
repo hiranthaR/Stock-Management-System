@@ -26,7 +26,7 @@
                                 <Image url="@../../../icons/warehouse.png"/>
                             </image>
                         </ImageView>
-                        <VBox alignment="CENTER_LEFT" prefHeight="78.0" prefWidth="414.0">
+                        <VBox alignment="CENTER_LEFT" prefHeight="78.0" prefWidth="382.0">
                             <HBox.margin>
                                 <Insets left="10.0"/>
                             </HBox.margin>
@@ -49,9 +49,17 @@
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                             </padding>
                         </VBox>
-                        <VBox alignment="CENTER" prefHeight="78.0" prefWidth="90.0">
+                        <VBox alignment="CENTER" prefHeight="78.0" prefWidth="121.0">
                             <children>
                                 <Label fx:id="tvCompanyInvoiceNo" text="0000"/>
+                                <Label fx:id="tvTotalPrice" text="0000">
+                                    <VBox.margin>
+                                        <Insets top="10.0"/>
+                                    </VBox.margin>
+                                    <font>
+                                        <Font name="System Bold" size="14.0"/>
+                                    </font>
+                                </Label>
                             </children>
                         </VBox>
                     </children>
