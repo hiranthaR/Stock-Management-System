@@ -41,6 +41,9 @@ public class MetaQueries {
     private String ITEM_DOCUMENT_ID = "item_meta";
     private String NEXT_ITEM_ID = "next_item_id";
 
+    private String INVOICE_DOCUMENT_ID = "invoice_meta";
+    private String NEXT_INVOICE_ID = "next_invoice_id";
+
     public int getCustomerNextID() {
         int nextID;
         try {
@@ -62,9 +65,9 @@ public class MetaQueries {
     public int getItemNextID() {
         int nextID;
         try {
-            Document customerDocument = metaMongoCollection.find(Filters.eq(ID, ITEM_DOCUMENT_ID)).first();
+            Document itemDocument = metaMongoCollection.find(Filters.eq(ID, ITEM_DOCUMENT_ID)).first();
 
-            nextID = customerDocument.getInteger(NEXT_ITEM_ID);
+            nextID = itemDocument.getInteger(NEXT_ITEM_ID);
             metaMongoCollection.updateOne(Filters.eq(ID, ITEM_DOCUMENT_ID),
                     new BasicDBObject("$set", new BasicDBObject(NEXT_ITEM_ID, nextID + 1)));
 
@@ -73,6 +76,24 @@ public class MetaQueries {
             nextID = 0;
             metaMongoCollection.insertOne(new Document(ID, ITEM_DOCUMENT_ID)
                     .append(NEXT_ITEM_ID, 1));
+        }
+        return nextID;
+    }
+
+    public int getInvoiceNextID() {
+        int nextID;
+        try {
+            Document invoiceDocument = metaMongoCollection.find(Filters.eq(ID, INVOICE_DOCUMENT_ID)).first();
+
+            nextID = invoiceDocument.getInteger(NEXT_INVOICE_ID);
+            metaMongoCollection.updateOne(Filters.eq(ID, INVOICE_DOCUMENT_ID),
+                    new BasicDBObject("$set", new BasicDBObject(NEXT_INVOICE_ID, nextID + 1)));
+
+        } catch (NullPointerException e) {
+            System.out.println("catch");
+            nextID = 0;
+            metaMongoCollection.insertOne(new Document(ID, INVOICE_DOCUMENT_ID)
+                    .append(NEXT_INVOICE_ID, 1));
         }
         return nextID;
     }

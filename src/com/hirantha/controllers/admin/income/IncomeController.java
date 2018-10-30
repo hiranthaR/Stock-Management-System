@@ -67,7 +67,7 @@ public class IncomeController implements Initializable {
             ((StackPane) basePane.getParent()).getChildren().add(newInvoiceView);
         }
         newInvoiceView.toFront();
-//        newItemController.loadUnitsAndCategories();
+        newInvoiceController.loadData();
         FadeIn animation = new FadeIn(newInvoiceView);
         animation.setSpeed(3);
         animation.play();
