@@ -43,15 +43,19 @@ public class IncomeController implements Initializable {
     private NewInvoiceController newInvoiceController;
     private AnchorPane newInvoiceView;
 
+    private AnchorPane invoiceFullViewPane;
+    private InvoiceFullViewController invoiceFullViewController;
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-//        FXMLLoader itemFullViewFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Items.ITEM_FULL_VIEW));
-//            itemFullViewPane = itemFullViewFxmlLoader.load();
-//            invoiceContainer.getChildren().add(itemFullViewPane);
-//            itemsFullViewController = itemFullViewFxmlLoader.getController();
-//            itemsFullViewController.setItemsController(ItemsController.this);
+            FXMLLoader incomeFullViewFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Income.INVOICE_FULL_VIEW));
+            invoiceFullViewPane = incomeFullViewFxmlLoader.load();
+            invoiceContainer.getChildren().add(invoiceFullViewPane);
+            invoiceFullViewController = incomeFullViewFxmlLoader.getController();
+            invoiceFullViewController.setIncomeController(IncomeController.this);
 
             //new items
             FXMLLoader newInvoiceFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Income.NEW_INVOICE));

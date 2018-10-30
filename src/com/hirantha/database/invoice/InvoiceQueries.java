@@ -1,19 +1,16 @@
 package com.hirantha.database.invoice;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.hirantha.database.Connection;
 import com.hirantha.database.meta.MetaQueries;
 import com.hirantha.models.data.invoice.Invoice;
 import com.hirantha.models.data.invoice.Supplier;
-import com.hirantha.models.data.item.Item;
 import com.hirantha.models.data.item.TableItem;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Projections;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -113,9 +110,7 @@ public class InvoiceQueries {
 
         FindIterable<Document> itemsResults = invoicesMongoCollection.find();
         itemsResults.sort(new BasicDBObject(DATE, 1));
-        itemsResults.iterator().forEachRemaining(document -> {
-            invoices.add(createInvoice(document));
-        });
+        itemsResults.iterator().forEachRemaining(document -> invoices.add(createInvoice(document)));
 
         return invoices;
     }
@@ -126,8 +121,18 @@ public class InvoiceQueries {
         String invoiceNumber = document.getString(SUPPLIER_INVOICE_NUMBER);
         String supplierName = document.getString(SUPPLIER_NAME);
         String supplierAddress = document.getString(SUPPLIER_ADDRESS);
-        List<TableItem> tableItems = (ArrayList<TableItem>) document.get(ITEMS, new TypeToken<ArrayList<TableItem>>() {
-        }.getType());
+        List<TableItem> tableItems = new ArrayList<>();
+        ArrayList<Document> itemsList = (ArrayList<Document>) document.get(ITEMS);
+        itemsList.forEach(e -> {
+
+            String itemId = e.getString(ITEM_CODE);
+            String itemName = e.getString(ITEM_NAME);
+            String unit = e.getString(ITEM_UNIT);
+            double costPerItem = e.getDouble(COST_PER_ITEM);
+            int quantity = e.getInteger(ITEM_QUANTITY);
+
+            tableItems.add(new TableItem(itemId, itemName, unit, quantity, costPerItem));
+        });
         double billCost = document.getDouble(TOTAL_BILL_COST);
         boolean cash = document.getBoolean(CASH);
 

@@ -44,6 +44,7 @@ public class ItemsController implements Initializable {
 
     private AnchorPane itemFullViewPane;
     private ItemsFullViewController itemsFullViewController;
+
     private List<Item> items;
     List<Item> temp = new ArrayList<>();
 
