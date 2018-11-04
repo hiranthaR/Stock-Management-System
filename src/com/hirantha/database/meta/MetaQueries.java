@@ -44,6 +44,9 @@ public class MetaQueries {
     private String INVOICE_DOCUMENT_ID = "invoice_meta";
     private String NEXT_INVOICE_ID = "next_invoice_id";
 
+    private String ADMIN_DOCUMENT_ID = "admin_meta";
+    private String NEXT_ADMIN_ID = "next_admin_id";
+
     public int getCustomerNextID() {
         int nextID;
         try {
@@ -94,6 +97,24 @@ public class MetaQueries {
             nextID = 0;
             metaMongoCollection.insertOne(new Document(ID, INVOICE_DOCUMENT_ID)
                     .append(NEXT_INVOICE_ID, 1));
+        }
+        return nextID;
+    }
+
+    public int getAdminNextID() {
+        int nextID;
+        try {
+            Document invoiceDocument = metaMongoCollection.find(Filters.eq(ID, ADMIN_DOCUMENT_ID)).first();
+
+            nextID = invoiceDocument.getInteger(NEXT_ADMIN_ID);
+            metaMongoCollection.updateOne(Filters.eq(ID, ADMIN_DOCUMENT_ID),
+                    new BasicDBObject("$set", new BasicDBObject(NEXT_ADMIN_ID, nextID + 1)));
+
+        } catch (NullPointerException e) {
+            System.out.println("catch");
+            nextID = 0;
+            metaMongoCollection.insertOne(new Document(ID, ADMIN_DOCUMENT_ID)
+                    .append(NEXT_ADMIN_ID, 1));
         }
         return nextID;
     }

@@ -38,7 +38,7 @@ public class InvoiceRowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        itemRow.setOnMouseClicked(e -> invoiceFullViewController.init(invoice));
+        itemRow.setOnMouseClicked(e -> invoiceFullViewController.init(invoice));
     }
 
     public void init(Invoice invoice, InvoiceFullViewController invoiceFullViewController) {

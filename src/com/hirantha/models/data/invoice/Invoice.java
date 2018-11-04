@@ -22,13 +22,13 @@ public class Invoice {
     Date chequeDate;
     double amount;
     String preparedAdminName;
-    ObjectId preparedAdminId;
+    String preparedAdminId;
     String checkedAdminName;
-    ObjectId checkedAdminId;
+    String checkedAdminId;
     String acceptedAdminName;
-    ObjectId acceptedAdminId;
+    String acceptedAdminId;
 
-    public Invoice(String _id, Date date, String invoiceNumber, String name, String address, List<TableItem> tableItems, double billCost, boolean cash, String bank, String branch, Date chequeDate, double amount, String preparedAdminName, ObjectId preparedAdminId, String checkedAdminName, ObjectId checkedAdminId, String acceptedAdminName, ObjectId acceptedAdminId) {
+    public Invoice(String _id, Date date, String invoiceNumber, String name, String address, List<TableItem> tableItems, double billCost, boolean cash, String bank, String branch, Date chequeDate, double amount, String preparedAdminName, String preparedAdminId, String checkedAdminName, String checkedAdminId, String acceptedAdminName, String acceptedAdminId) {
         this._id = _id;
         this.date = date;
         this.invoiceNumber = invoiceNumber;
@@ -166,11 +166,11 @@ public class Invoice {
         return this;
     }
 
-    public ObjectId getPreparedAdminId() {
+    public String getPreparedAdminId() {
         return preparedAdminId;
     }
 
-    public Invoice setPreparedAdminId(ObjectId preparedAdminId) {
+    public Invoice setPreparedAdminId(String preparedAdminId) {
         this.preparedAdminId = preparedAdminId;
         return this;
     }
@@ -184,11 +184,11 @@ public class Invoice {
         return this;
     }
 
-    public ObjectId getCheckedAdminId() {
+    public String getCheckedAdminId() {
         return checkedAdminId;
     }
 
-    public Invoice setCheckedAdminId(ObjectId checkedAdminId) {
+    public Invoice setCheckedAdminId(String checkedAdminId) {
         this.checkedAdminId = checkedAdminId;
         return this;
     }
@@ -202,12 +202,36 @@ public class Invoice {
         return this;
     }
 
-    public ObjectId getAcceptedAdminId() {
+    public String getAcceptedAdminId() {
         return acceptedAdminId;
     }
 
-    public Invoice setAcceptedAdminId(ObjectId acceptedAdminId) {
+    public Invoice setAcceptedAdminId(String acceptedAdminId) {
         this.acceptedAdminId = acceptedAdminId;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Invoice{" +
+                "_id='" + _id + '\'' +
+                ", date=" + date +
+                ", invoiceNumber='" + invoiceNumber + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", tableItems=" + tableItems +
+                ", billCost=" + billCost +
+                ", cash=" + cash +
+                ", bank='" + bank + '\'' +
+                ", branch='" + branch + '\'' +
+                ", chequeDate=" + chequeDate +
+                ", amount=" + amount +
+                ", preparedAdminName='" + preparedAdminName + '\'' +
+                ", preparedAdminId=" + preparedAdminId +
+                ", checkedAdminName='" + checkedAdminName + '\'' +
+                ", checkedAdminId=" + checkedAdminId +
+                ", acceptedAdminName='" + acceptedAdminName + '\'' +
+                ", acceptedAdminId=" + acceptedAdminId +
+                '}';
     }
 }

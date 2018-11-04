@@ -144,7 +144,7 @@ public class NewInvoiceController implements Initializable {
     private boolean goingToUpdate;
     private Invoice invoice;
     private IncomeController incomeController;
-    private List<Supplier> suppliers;
+    private Set<Supplier> suppliers;
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -437,7 +437,7 @@ public class NewInvoiceController implements Initializable {
         btnSave.setOnMouseClicked(e -> {
             if (checkInvoiceItemProperties()) {
                 if (goingToUpdate) {
-//                    ItemQueries.getInstance().updateItem(createItem());
+                    InvoiceQueries.getInstance().updateInvoice(createInvoice());
                     goingToUpdate = false;
                 } else {
                     InvoiceQueries.getInstance().insertInvoice(createInvoice());
@@ -578,14 +578,14 @@ public class NewInvoiceController implements Initializable {
         }
 
         String preparedAdminName = cmbPrepared.getValue().getName();
-        ObjectId preparedAdminId = cmbPrepared.getValue().getId();
+        String preparedAdminId = cmbPrepared.getValue().getId();
         String acceptedAdminName = cmbAccepted.getValue().getName();
-        ObjectId acceptedAdminId = cmbAccepted.getValue().getId();
+        String acceptedAdminId = cmbAccepted.getValue().getId();
         String checkedAdminName = cmbchecked.getValue().getName();
-        ObjectId checkedAdminId = cmbchecked.getValue().getId();
+        String checkedAdminId = cmbchecked.getValue().getId();
 
-        Invoice invoice = new Invoice("", date, invoiceNumber, supplierName, supplierAddress, tableItems, billCost, cash, bank, branch, chequeDate, amount, preparedAdminName, preparedAdminId, checkedAdminName, checkedAdminId, acceptedAdminName, acceptedAdminId);
-        return invoice;
+
+        return new Invoice(goingToUpdate ? invoice.get_id() : "", date, invoiceNumber, supplierName, supplierAddress, tableItems, billCost, cash, bank, branch, chequeDate, amount, preparedAdminName, preparedAdminId, checkedAdminName, checkedAdminId, acceptedAdminName, acceptedAdminId);
     }
 
     private void clearFields() {
@@ -631,18 +631,43 @@ public class NewInvoiceController implements Initializable {
     }
 
     public void initToUpdate(Invoice invoice) {
+
+        System.out.println(invoice.getPreparedAdminId().toString());
         this.invoice = invoice;
         this.goingToUpdate = true;
+        dpDate.setValue(new java.sql.Date(invoice.getDate().getTime()).toLocalDate());
+        txtName.setText(invoice.getName());
+        txtAddress.setText(invoice.getAddress());
+        txtInvoiceNumber.setText(invoice.getInvoiceNumber());
+        table.getItems().addAll(invoice.getTableItems());
+        txtBillCost.setText(String.valueOf(invoice.getBillCost()));
+        if (invoice.isCash()) {
+            radioCash.setSelected(true);
+        } else {
+            radioCheque.setSelected(true);
+            txtBank.setText(invoice.getBank());
+            txtBranch.setText(invoice.getBranch());
+            txtAmount.setText(String.valueOf(invoice.getAmount()));
+            dpChequeDate.setValue(new java.sql.Date(invoice.getChequeDate().getTime()).toLocalDate());
+
+            System.out.println(invoice.getPreparedAdminId().toString());
+            cmbPrepared.setValue(AdminQueries.getInstance().getAdmin(invoice.getPreparedAdminId()));
+            cmbAccepted.setValue(AdminQueries.getInstance().getAdmin(invoice.getAcceptedAdminId()));
+            cmbchecked.setValue(AdminQueries.getInstance().getAdmin(invoice.getCheckedAdminId()));
+        }
+
 
     }
 
     public void loadData() {
         items = ItemQueries.getInstance().getItems();
         TextFields.bindAutoCompletion(cmbItemCode.getEditor(), cmbItemCode.getItems().stream().map(Item::getItemCode).collect(Collectors.toList()));
+        cmbItemCode.getItems().clear();
+        cmbItemName.getItems().clear();
+        cmbItemName.getItems().addAll(items);
+        cmbItemCode.getItems().addAll(items);
         admins = AdminQueries.getInstance().getAdmins();
-        suppliers = InvoiceQueries.getInstance().getSuppliers();
+        suppliers = new HashSet<>(InvoiceQueries.getInstance().getSuppliers());
         TextFields.bindAutoCompletion(txtName, suppliers.stream().map(Supplier::getName).collect(Collectors.toList()));
-
-        System.out.println("cas");
     }
 }

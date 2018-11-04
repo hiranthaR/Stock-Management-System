@@ -1,5 +1,7 @@
 package com.hirantha.models.data.invoice;
 
+import java.util.Objects;
+
 public class Supplier {
 
     private String name;
@@ -34,5 +36,19 @@ public class Supplier {
                 "name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Supplier supplier = (Supplier) o;
+        return Objects.equals(name, supplier.name) &&
+                Objects.equals(address, supplier.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, address);
     }
 }

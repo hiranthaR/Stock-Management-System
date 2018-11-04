@@ -11,6 +11,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +43,9 @@ public class AdminQueries {
 
 
     public void insertAdmin(Admin admin) {
-        int id = MetaQueries.getInstance().getCustomerNextID();
+        int id = MetaQueries.getInstance().getAdminNextID();
         Document adminDocument = new Document()
+                .append(ID, id)
                 .append(NAME, admin.getName())
                 .append(USERNAME, admin.getUsername())
                 .append(PASSWORD, admin.getPassword())
@@ -60,7 +62,7 @@ public class AdminQueries {
                         .append(USERNAME, admin.getUsername())
                         .append(LEVEL, admin.getLevel()));
 
-        UpdateResult result = adminsMongoCollection.updateOne(Filters.eq(ID, admin.getId().toString()), newDataDocument);
+        UpdateResult result = adminsMongoCollection.updateOne(Filters.eq(ID, admin.getId()), newDataDocument);
         System.out.println(result.getModifiedCount());
         System.out.println(result.getMatchedCount());
 
@@ -80,5 +82,8 @@ public class AdminQueries {
         adminsMongoCollection.deleteOne(Filters.eq(ID, admin.getId()));
     }
 
+    public Admin getAdmin(String id) {
+        return gson.fromJson(adminsMongoCollection.find(Filters.eq(ID, id)).first().toJson(), Admin.class);
+    }
 
 }

@@ -4,6 +4,7 @@ import animatefx.animation.FadeIn;
 import com.hirantha.controllers.admin.items.ItemsController;
 import com.hirantha.database.invoice.InvoiceQueries;
 import com.hirantha.fxmls.FXMLS;
+import com.hirantha.models.data.customer.Customer;
 import com.hirantha.models.data.invoice.Invoice;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,6 +51,7 @@ public class IncomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         try {
             FXMLLoader incomeFullViewFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Income.INVOICE_FULL_VIEW));
             invoiceFullViewPane = incomeFullViewFxmlLoader.load();
@@ -81,22 +83,22 @@ public class IncomeController implements Initializable {
         return invoices;
     }
 
-    private void setRowViews(List<Invoice> customers) throws IOException {
+    private void setRowViews(List<Invoice> invoices) throws IOException {
         rowsContainer.getChildren().clear();
         for (Invoice invoice : invoices) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Income.INVOICE_ROW));
             AnchorPane row = fxmlLoader.load();
-            fxmlLoader.<InvoiceRowController>getController().init(invoice, null);
+            fxmlLoader.<InvoiceRowController>getController().init(invoice, invoiceFullViewController);
             rowsContainer.getChildren().add(row);
         }
 
-//        if (customers.size() == 0) {
-//            profileContainer.getChildren().clear();
-//        } else {
-//            profileContainer.getChildren().clear();
-//            profileContainer.getChildren().add(profilePane);
-//            customerProfileController.init(customers.get(0));
-//        }
+        if (invoices.size() == 0) {
+            invoiceContainer.getChildren().clear();
+        } else {
+            invoiceContainer.getChildren().clear();
+            invoiceContainer.getChildren().add(invoiceFullViewPane);
+            invoiceFullViewController.init(invoices.get(0));
+        }
     }
 
     public void showNewItemView() {
@@ -109,4 +111,11 @@ public class IncomeController implements Initializable {
         animation.setSpeed(3);
         animation.play();
     }
+
+    void showUpdateInvoice(Invoice invoice) {
+        showNewItemView();
+        newInvoiceController.initToUpdate(invoice);
+    }
+
+
 }

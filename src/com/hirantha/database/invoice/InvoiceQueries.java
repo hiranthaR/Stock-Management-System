@@ -11,9 +11,10 @@ import com.mongodb.DBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.result.UpdateResult;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -95,6 +96,38 @@ public class InvoiceQueries {
         invoicesMongoCollection.insertOne(invoiceDocument);
     }
 
+    public void updateInvoice(Invoice invoice) {
+
+        List<DBObject> tableItemList = new ArrayList<>();
+        invoice.getTableItems().forEach(e -> tableItemList.add(new BasicDBObject(ITEM_CODE, e.getItemId())
+                .append(ITEM_NAME, e.getName())
+                .append(ITEM_UNIT, e.getUnit())
+                .append(ITEM_QUANTITY, e.getQuantity())
+                .append(COST_PER_ITEM, e.getCostPerItem())));
+
+        BasicDBObject newDataDocument = new BasicDBObject("$set",
+                new BasicDBObject()
+                        .append(DATE, invoice.getDate())
+                        .append(SUPPLIER_NAME, invoice.getName())
+                        .append(SUPPLIER_ADDRESS, invoice.getAddress())
+                        .append(SUPPLIER_INVOICE_NUMBER, invoice.getInvoiceNumber())
+                        .append(ITEMS, tableItemList)
+                        .append(TOTAL_BILL_COST, invoice.getBillCost())
+                        .append(CASH, invoice.isCash())
+                        .append(BANK, invoice.getBank())
+                        .append(BRANCH, invoice.getBranch())
+                        .append(AMOUNT, invoice.getAmount())
+                        .append(CHEQUE_DATE, invoice.getChequeDate())
+                        .append(PREPARED_ADMIN_ID, invoice.getPreparedAdminId())
+                        .append(PREPARED_ADMIN_NAME, invoice.getPreparedAdminName())
+                        .append(ACCEPTED_ADMIN_ID, invoice.getAcceptedAdminId())
+                        .append(ACCEPTED_ADMIN_NAME, invoice.getAcceptedAdminName())
+                        .append(CHECKED_ADMIN_ID, invoice.getCheckedAdminId())
+                        .append(CHECKED_ADMIN_NAME, invoice.getCheckedAdminName()));
+
+        invoicesMongoCollection.updateOne(Filters.eq(INVOICE_ID, invoice.get_id()), newDataDocument);
+    }
+
     public List<Supplier> getSuppliers() {
 
         List<Supplier> suppliers = new ArrayList<>();
@@ -148,13 +181,16 @@ public class InvoiceQueries {
         }
 
         String preparedAdminName = document.getString(PREPARED_ADMIN_NAME);
-        ObjectId preparedAdminId = document.getObjectId(PREPARED_ADMIN_ID);
+        String preparedAdminId = document.getString(PREPARED_ADMIN_ID);
         String acceptedAdminName = document.getString(ACCEPTED_ADMIN_NAME);
-        ObjectId acceptedAdminId = document.getObjectId(ACCEPTED_ADMIN_ID);
+        String acceptedAdminId = document.getString(ACCEPTED_ADMIN_ID);
         String checkedAdminName = document.getString(CHECKED_ADMIN_NAME);
-        ObjectId checkedAdminId = document.getObjectId(CHECKED_ADMIN_ID);
+        String checkedAdminId = document.getString(CHECKED_ADMIN_ID);
 
         return new Invoice(id, date, invoiceNumber, supplierName, supplierAddress, tableItems, billCost, cash, bank, branch, chequeDate, amount, preparedAdminName, preparedAdminId, checkedAdminName, checkedAdminId, acceptedAdminName, acceptedAdminId);
     }
 
+    public void deleteInvoice(Invoice invoice) {
+        invoicesMongoCollection.deleteOne(Filters.eq(INVOICE_ID, invoice.get_id()));
+    }
 }

@@ -191,9 +191,9 @@ public class NewAdminController implements Initializable {
         if (chkCustomer.isSelected()) level += Permissions.ADD_CUSTOMER;
         if (chkItems.isSelected()) level += Permissions.ADD_ITEM;
 
-        ObjectId id;
+        String id;
         if (goingToUpdate) id = admin.getId();
-        else id = new ObjectId();
+        else id = "";
 
         return new Admin(id, name, username, password, level);
     }
