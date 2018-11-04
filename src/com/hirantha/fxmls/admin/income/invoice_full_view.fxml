@@ -30,7 +30,7 @@
                                stylesheets="@../../../css/admin/dashboard/customers/customers.css" vbarPolicy="NEVER">
                      <content>
                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                                     minWidth="-Infinity" prefHeight="1320.0" prefWidth="588.0">
+                                     minWidth="-Infinity" prefWidth="588.0">
                            <children>
                                <VBox alignment="TOP_CENTER" layoutX="-50.0" layoutY="101.0" prefHeight="200.0"
                                      prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
@@ -205,7 +205,7 @@
                                            <Insets bottom="5.0" left="25.0" right="25.0" top="5.0"/>
                                        </padding>
                                     </HBox>
-                                     <TableView fx:id="table" prefWidth="576.0">
+                                     <TableView fx:id="table" minHeight="-Infinity" prefWidth="576.0">
                                        <columns>
                                            <TableColumn fx:id="clmnCode" editable="false" prefWidth="69.0" text="Code"/>
                                            <TableColumn fx:id="clmnName" editable="false" prefWidth="162.0"
