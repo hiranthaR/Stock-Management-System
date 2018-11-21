@@ -116,5 +116,4 @@ public class IncomeController implements Initializable {
         newInvoiceController.initToUpdate(invoice);
     }
 
-
 }

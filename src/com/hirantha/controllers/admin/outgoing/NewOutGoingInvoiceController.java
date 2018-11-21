@@ -30,10 +30,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -148,9 +145,11 @@ public class NewOutGoingInvoiceController implements Initializable {
             txtName.setText(WordUtils.capitalize(t1));
             Customer temp = customers.stream().filter(i -> i.getName().equalsIgnoreCase(t1)).findFirst().orElse(null);
             if (temp != null) {
+                selectedCustomer = temp;
                 txtAddress.setText(temp.getAddress());
                 txtRank.setText(String.valueOf(temp.getRank()));
-            }
+            } else selectedCustomer = null;
+            reArrangeDiscount();
         });
 
         //item code settings
@@ -403,6 +402,16 @@ public class NewOutGoingInvoiceController implements Initializable {
         return status;
     }
 
+    private void reArrangeDiscount() {
+        double totalBill = 0;
+        List<BillTableItem> billTableItems = new ArrayList<>(table.getItems());
+        for (BillTableItem billTableItem : billTableItems) {
+            billTableItem.setDiscount(discount(billTableItem.getCostPerItem()) * billTableItem.getQuantity());
+            totalBill += billTableItem.getCostPerItem() * billTableItem.getQuantity() - billTableItem.getDiscount();
+        }
+        txtBillCost.setText(String.valueOf(totalBill));
+    }
+
     private void addItemToTable() {
         if (checkTableItemProperties()) {
             BillTableItem tableItem = createTableItem();
@@ -415,9 +424,10 @@ public class NewOutGoingInvoiceController implements Initializable {
             tvUnit.setText("");
 
             if (txtBillCost.getText().isEmpty() || txtBillCost.getText().equals("0")) {
-                txtBillCost.setText(String.valueOf((tableItem.getCostPerItem() * tableItem.getQuantity()) - (discount(tableItem.getCostPerItem()) * tableItem.getQuantity())));
+                txtBillCost.setText(String.valueOf((tableItem.getCostPerItem() * tableItem.getQuantity()) - tableItem.getDiscount()));
+                System.out.println(tableItem.getDiscount());
             } else {
-                txtBillCost.setText(String.valueOf(Double.parseDouble(txtBillCost.getText()) + (tableItem.getCostPerItem() * tableItem.getQuantity()) - (discount(tableItem.getCostPerItem()) * tableItem.getQuantity())));
+                txtBillCost.setText(String.valueOf(Double.parseDouble(txtBillCost.getText()) + (tableItem.getCostPerItem() * tableItem.getQuantity()) - tableItem.getDiscount()));
             }
 
         }
@@ -440,7 +450,7 @@ public class NewOutGoingInvoiceController implements Initializable {
         if (selectedItem.isPercentage()) {
             discount = itemCost * selectedItem.getDiscountAccoringToRank(selectedCustomer == null ? 0 : selectedCustomer.getRank()) / 100;
         } else {
-            discount = itemCost - selectedItem.getDiscountAccoringToRank(selectedCustomer == null ? 0 : selectedCustomer.getRank());
+            discount = selectedItem.getDiscountAccoringToRank(selectedCustomer == null ? 0 : selectedCustomer.getRank());
         }
         return discount;
     }

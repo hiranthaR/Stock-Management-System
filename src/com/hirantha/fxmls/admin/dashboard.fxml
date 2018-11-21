@@ -227,7 +227,7 @@
                                                                 <Insets/>
                                                             </VBox.margin>
                                                         </HBox>
-                                                        <HBox fx:id="menuFinancial1" alignment="CENTER_LEFT"
+                                                        <HBox fx:id="menuOutgoing" alignment="CENTER_LEFT"
                                                               prefWidth="200.0" styleClass="admin-menu-item"
                                                               stylesheets="@../../css/admin/dashboard/admincss.css">
                                                             <children>

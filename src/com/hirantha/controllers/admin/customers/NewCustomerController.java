@@ -3,6 +3,7 @@ package com.hirantha.controllers.admin.customers;
 import animatefx.animation.FadeOut;
 import com.hirantha.database.customers.CustomerQueries;
 import com.hirantha.models.data.customer.Customer;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -50,6 +51,8 @@ public class NewCustomerController implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        Platform.runLater(() -> spinnerTitles.requestFocus());
 
         spinnerTitles.requestFocus();
 

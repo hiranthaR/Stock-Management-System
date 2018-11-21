@@ -37,6 +37,14 @@ public class FXMLS {
 
         }
 
+        public static class Outgoing {
+            public static String OUTGOING_DASHBOARD = "/com/hirantha/fxmls/admin/outgoing/outgoing.fxml";
+            public static String NEW_BILL = "/com/hirantha/fxmls/admin/outgoing/new_outgoing_invoice.fxml";
+            public static String BILL_ROW = "/com/hirantha/fxmls/admin/outgoing/outgoing_invoice_row.fxml";
+            public static String OUTGOING_BILL_FULL_VIEW = "/com/hirantha/fxmls/admin/outgoing/outgoing_invoice_full_view.fxml";
+
+        }
+
         public static class Admins {
             public static String ADMIN_DASHBOARD = "/com/hirantha/fxmls/admin/admins/admins.fxml";
             public static String NEW_ADMIN = "/com/hirantha/fxmls/admin/admins/new_admin.fxml";
