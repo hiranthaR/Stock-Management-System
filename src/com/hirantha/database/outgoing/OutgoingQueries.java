@@ -40,9 +40,9 @@ public class OutgoingQueries {
     private String INVOICE_ID = "_id";
     private String DATE = "date";
     private String CUSTOMER_ID = "id";
-    private String CUSTOMER_NAME = "name";
-    private String CUSTOMER_ADDRESS = "address";
-    private String CUSTOMER_RANK = "address";
+    private String CUSTOMER_NAME = "customer_name";
+    private String CUSTOMER_ADDRESS = "customer_address";
+    private String CUSTOMER_RANK = "customer_rank";
     private String ITEMS = "tableItems";
     private String TOTAL_BILL_COST = "billCost";
     private String ITEM_CODE = "itemId";
@@ -63,6 +63,7 @@ public class OutgoingQueries {
 
     public void insertBill(Bill bill) {
         int id = MetaQueries.getInstance().getBillNextID();
+        System.out.println(bill);
 
         List<DBObject> tableItemList = new ArrayList<>();
         bill.getTableItems().forEach(e -> tableItemList.add(new BasicDBObject(ITEM_CODE, e.getItemId())
@@ -105,7 +106,6 @@ public class OutgoingQueries {
 
         BasicDBObject newDataDocument = new BasicDBObject("$set",
                 new BasicDBObject()
-                        .append(DATE, bill.getDate())
                         .append(DATE, bill.getDate())
                         .append(CUSTOMER_ID, bill.getCustomerId())
                         .append(CUSTOMER_NAME, bill.getCustomerName())
@@ -153,6 +153,7 @@ public class OutgoingQueries {
             int quantity = e.getInteger(ITEM_QUANTITY);
 
             tableItems.add(new BillTableItem(itemId, itemName, unit, quantity, costPerItem, discount, percentage));
+            System.out.println(tableItems.get(tableItems.size() - 1));
         });
         double billCost = document.getDouble(TOTAL_BILL_COST);
 

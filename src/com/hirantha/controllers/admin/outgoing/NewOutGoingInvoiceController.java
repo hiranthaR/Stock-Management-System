@@ -374,11 +374,11 @@ public class NewOutGoingInvoiceController implements Initializable {
                 } else {
                     OutgoingQueries.getInstance().insertBill(createBill());
                 }
-//                try {
-//                    incomeController.readRows();
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();
-//                }
+                try {
+                    outGoingController.readRows();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
                 goBack();
             }
         });
@@ -464,11 +464,11 @@ public class NewOutGoingInvoiceController implements Initializable {
             ((StackPane) btnCancel.getParent().getParent()).getChildren().remove(btnCancel.getParent());
             clearFields();
         });
-//        try {
-//            outGoingController.readRows();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            outGoingController.readRows();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadData() {

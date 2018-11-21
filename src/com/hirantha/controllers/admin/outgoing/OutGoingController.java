@@ -1,7 +1,10 @@
 package com.hirantha.controllers.admin.outgoing;
 
 import animatefx.animation.FadeIn;
+import com.hirantha.controllers.admin.income.InvoiceRowController;
+import com.hirantha.database.outgoing.OutgoingQueries;
 import com.hirantha.fxmls.FXMLS;
+import com.hirantha.models.data.invoice.Invoice;
 import com.hirantha.models.data.outgoing.Bill;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,7 +69,7 @@ public class OutGoingController implements Initializable {
             newOutGoingInvoiceController = newInvoiceFxmlLoader.getController();
             newOutGoingInvoiceController.setOutGoingController(OutGoingController.this);
 
-//            bills = readRows();
+            bills = readRows();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -75,13 +78,32 @@ public class OutGoingController implements Initializable {
         btnNewInvoice.setOnMouseClicked(e -> showNewItemView());
     }
 
-//    List<Bill> readRows() throws IOException {
+    List<Bill> readRows() throws IOException {
 
-//        bills = InvoiceQueries.getInstance().getInvoices();
-//        setRowViews(invoices);
+        bills = OutgoingQueries.getInstance().getBills();
+        setRowViews(bills);
 
-//        return invoices;
-//    }
+        return bills;
+    }
+
+    private void setRowViews(List<Bill> bills) throws IOException {
+        rowsContainer.getChildren().clear();
+        for (Bill bill : bills) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Outgoing.BILL_ROW));
+            AnchorPane row = fxmlLoader.load();
+//            fxmlLoader.<InvoiceRowController>getController().init(bill, invoiceFullViewController);
+            rowsContainer.getChildren().add(row);
+        }
+
+        if (bills.size() == 0) {
+            invoiceContainer.getChildren().clear();
+        } else {
+            invoiceContainer.getChildren().clear();
+            invoiceContainer.getChildren().add(outgoingFullViewPane);
+//            outGoingInvoiceFullViewController.init(bills.get(0));
+        }
+    }
+
 
     public void showNewItemView() {
         if (!((StackPane) basePane.getParent()).getChildren().contains(newOutGoingView)) {
@@ -92,6 +114,11 @@ public class OutGoingController implements Initializable {
         FadeIn animation = new FadeIn(newOutGoingView);
         animation.setSpeed(3);
         animation.play();
+    }
+
+    void showUpdateInvoice(Bill bill) {
+        showNewItemView();
+        newOutGoingInvoiceController.initToUpdate(bill);
     }
 
 }

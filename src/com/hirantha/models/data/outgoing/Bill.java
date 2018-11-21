@@ -176,4 +176,25 @@ public class Bill {
         this.vehicleNumber = vehicleNumber;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "_id='" + _id + '\'' +
+                ", date=" + date +
+                ", customerId='" + customerId + '\'' +
+                ", customerName='" + customerName + '\'' +
+                ", customerAddress='" + customerAddress + '\'' +
+                ", customerRank=" + customerRank +
+                ", tableItems=" + tableItems +
+                ", totalBillCost=" + totalBillCost +
+                ", preparedAdminName='" + preparedAdminName + '\'' +
+                ", preparedAdminId='" + preparedAdminId + '\'' +
+                ", checkedAdminName='" + checkedAdminName + '\'' +
+                ", checkedAdminId='" + checkedAdminId + '\'' +
+                ", acceptedAdminName='" + acceptedAdminName + '\'' +
+                ", acceptedAdminId='" + acceptedAdminId + '\'' +
+                ", vehicleNumber='" + vehicleNumber + '\'' +
+                '}';
+    }
 }
