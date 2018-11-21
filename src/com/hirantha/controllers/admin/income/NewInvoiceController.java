@@ -632,7 +632,6 @@ public class NewInvoiceController implements Initializable {
 
     public void initToUpdate(Invoice invoice) {
 
-        System.out.println(invoice.getPreparedAdminId().toString());
         this.invoice = invoice;
         this.goingToUpdate = true;
         dpDate.setValue(new java.sql.Date(invoice.getDate().getTime()).toLocalDate());
@@ -649,14 +648,10 @@ public class NewInvoiceController implements Initializable {
             txtBranch.setText(invoice.getBranch());
             txtAmount.setText(String.valueOf(invoice.getAmount()));
             dpChequeDate.setValue(new java.sql.Date(invoice.getChequeDate().getTime()).toLocalDate());
-
-            System.out.println(invoice.getPreparedAdminId().toString());
             cmbPrepared.setValue(AdminQueries.getInstance().getAdmin(invoice.getPreparedAdminId()));
             cmbAccepted.setValue(AdminQueries.getInstance().getAdmin(invoice.getAcceptedAdminId()));
             cmbchecked.setValue(AdminQueries.getInstance().getAdmin(invoice.getCheckedAdminId()));
         }
-
-
     }
 
     public void loadData() {

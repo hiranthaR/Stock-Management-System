@@ -83,4 +83,8 @@ public class CustomerQueries {
     public void deleteCustomer(Customer customer) {
         customersMongoCollection.deleteOne(Filters.eq(ID, customer.getId()));
     }
+
+    public Customer getCustomer(String id) {
+        return gson.fromJson(customersMongoCollection.find(Filters.eq(ID, id)).first().toJson(), Customer.class);
+    }
 }

@@ -7,6 +7,7 @@ import com.hirantha.database.admins.AdminQueries;
 import com.hirantha.database.customers.CustomerQueries;
 import com.hirantha.database.invoice.InvoiceQueries;
 import com.hirantha.database.items.ItemQueries;
+import com.hirantha.database.outgoing.OutgoingQueries;
 import com.hirantha.models.data.admins.Admin;
 import com.hirantha.models.data.customer.Customer;
 import com.hirantha.models.data.invoice.Supplier;
@@ -366,20 +367,20 @@ public class NewOutGoingInvoiceController implements Initializable {
         cmbAccepted.setValue(CurrentAdmin.getInstance().getCurrentAdmin());
 
         btnSave.setOnMouseClicked(e -> {
-//            if (checkInvoiceItemProperties()) {
-//                if (goingToUpdate) {
-//                    InvoiceQueries.getInstance().updateInvoice(createInvoice());
-//                    goingToUpdate = false;
-//                } else {
-//                    InvoiceQueries.getInstance().insertInvoice(createInvoice());
-//                }
+            if (checkBillProperties()) {
+                if (goingToUpdate) {
+                    OutgoingQueries.getInstance().updateInvoice(createBill());
+                    goingToUpdate = false;
+                } else {
+                    OutgoingQueries.getInstance().insertBill(createBill());
+                }
 //                try {
 //                    incomeController.readRows();
 //                } catch (IOException e1) {
 //                    e1.printStackTrace();
 //                }
-//                goBack();
-//            }
+                goBack();
+            }
         });
     }
 
@@ -461,7 +462,7 @@ public class NewOutGoingInvoiceController implements Initializable {
         fadeOut.play();
         fadeOut.getTimeline().setOnFinished(ex -> {
             ((StackPane) btnCancel.getParent().getParent()).getChildren().remove(btnCancel.getParent());
-//            clearFields();
+            clearFields();
         });
 //        try {
 //            outGoingController.readRows();
@@ -486,4 +487,82 @@ public class NewOutGoingInvoiceController implements Initializable {
         this.outGoingController = outGoingController;
         return this;
     }
+
+    private void clearFields() {
+        dpDate.setValue(LocalDate.now());
+        txtName.setText("");
+        txtAddress.setText("");
+        txtRank.setText("0");
+        cmbItemCode.setValue(null);
+        cmbItemName.setValue(null);
+        txtQuanitiy.setText("");
+        tvUnit.setText("");
+        txtCostPerItem.setText("");
+        table.getItems().clear();
+        txtBillCost.setText("0");
+        cmbPrepared.setValue(CurrentAdmin.getInstance().getCurrentAdmin());
+        cmbAccepted.setValue(CurrentAdmin.getInstance().getCurrentAdmin());
+        cmbchecked.setValue(CurrentAdmin.getInstance().getCurrentAdmin());
+        txtVehicleNumber.setText("");
+    }
+
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+    private boolean checkBillProperties() {
+        boolean status = true;
+        if (table.getItems().size() < 1) {
+            alert.setContentText("No items added yet!");
+            alert.showAndWait();
+            status = false;
+        }
+
+        if (txtBillCost.getText().isEmpty()) {
+            alert.setContentText("Total bill cost is empty!");
+            alert.showAndWait();
+            status = false;
+        }
+
+        return status;
+    }
+
+    private Bill createBill() {
+        Date date = java.sql.Date.valueOf(dpDate.getValue());
+        String customerName = txtName.getText();
+        String customerAddress = txtAddress.getText();
+        int customerRank = Integer.parseInt(txtRank.getText());
+        String customerId = selectedCustomer == null ? "" : selectedCustomer.getId();
+        List<BillTableItem> tableItems = new ArrayList<>(table.getItems());
+        double billCost = Double.parseDouble(txtBillCost.getText());
+
+        String preparedAdminName = cmbPrepared.getValue().getName();
+        String preparedAdminId = cmbPrepared.getValue().getId();
+        String acceptedAdminName = cmbAccepted.getValue().getName();
+        String acceptedAdminId = cmbAccepted.getValue().getId();
+        String checkedAdminName = cmbchecked.getValue().getName();
+        String checkedAdminId = cmbchecked.getValue().getId();
+        String vehicleNumber = txtVehicleNumber.getText();
+
+
+        return new Bill("", date, customerId, customerName, customerAddress, customerRank, tableItems, billCost, preparedAdminName, preparedAdminId, checkedAdminName, checkedAdminId, acceptedAdminName, acceptedAdminId, vehicleNumber);
+    }
+
+
+    public void initToUpdate(Bill bill) {
+
+        this.bill = bill;
+        this.goingToUpdate = true;
+        dpDate.setValue(new java.sql.Date(bill.getDate().getTime()).toLocalDate());
+        txtName.setText(bill.getCustomerName());
+        txtAddress.setText(bill.getCustomerAddress());
+        txtRank.setText(String.valueOf(bill.getCustomerRank()));
+        selectedCustomer = CustomerQueries.getInstance().getCustomer(bill.getCustomerId());
+        table.getItems().addAll(bill.getTableItems());
+        txtBillCost.setText(String.valueOf(bill.getTotalBillCost()));
+        cmbPrepared.setValue(AdminQueries.getInstance().getAdmin(bill.getPreparedAdminId()));
+        cmbAccepted.setValue(AdminQueries.getInstance().getAdmin(bill.getAcceptedAdminId()));
+        cmbchecked.setValue(AdminQueries.getInstance().getAdmin(bill.getCheckedAdminId()));
+        txtVehicleNumber.setText(bill.getVehicleNumber());
+    }
 }
+
+
