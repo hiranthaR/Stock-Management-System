@@ -14,7 +14,7 @@
 
 <AnchorPane fx:id="basePane" prefHeight="840.0" prefWidth="1357.0" style="-fx-background-color: #ffffff;"
             xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.hirantha.controllers.admin.income.IncomeController">
+            fx:controller="com.hirantha.controllers.admin.outgoing.OutGoingController">
     <children>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #cecece;"
                     AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"

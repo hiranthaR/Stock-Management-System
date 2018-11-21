@@ -39,15 +39,14 @@ public class IncomeController implements Initializable {
     private Label btnNewInvoice;
 
     private List<Invoice> invoices;
-    List<Invoice> tempInvoices = new ArrayList<>();
+    //TODO:Implement search
+    List<Invoice> tempInvoices = new ArrayList<>(); //for search
 
     private NewInvoiceController newInvoiceController;
     private AnchorPane newInvoiceView;
 
     private AnchorPane invoiceFullViewPane;
     private InvoiceFullViewController invoiceFullViewController;
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

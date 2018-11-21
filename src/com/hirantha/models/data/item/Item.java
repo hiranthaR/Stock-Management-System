@@ -115,4 +115,17 @@ public class Item {
     public void setRank3(double rank3) {
         this.rank3 = rank3;
     }
+
+    public double getDiscountAccoringToRank(int rank) {
+        switch (rank) {
+            case 1:
+                return rank1;
+            case 2:
+                return rank2;
+            case 3:
+                return rank3;
+            default:
+                return 0;
+        }
+    }
 }
