@@ -61,7 +61,7 @@ public class OutGoingController implements Initializable {
             outgoingFullViewPane = outgoingFullViewFxmlLoader.load();
             invoiceContainer.getChildren().add(outgoingFullViewPane);
             outGoingInvoiceFullViewController = outgoingFullViewFxmlLoader.getController();
-//            outGoingInvoiceFullViewController.setOutGoingController(this);
+            outGoingInvoiceFullViewController.setOutGoingController(this);
 
             //new items
             FXMLLoader newInvoiceFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Outgoing.NEW_BILL));
@@ -100,7 +100,7 @@ public class OutGoingController implements Initializable {
         } else {
             invoiceContainer.getChildren().clear();
             invoiceContainer.getChildren().add(outgoingFullViewPane);
-//            outGoingInvoiceFullViewController.init(bills.get(0));
+            outGoingInvoiceFullViewController.init(bills.get(0));
         }
     }
 
