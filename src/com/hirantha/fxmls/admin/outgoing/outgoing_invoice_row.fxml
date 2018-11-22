@@ -36,7 +36,7 @@
                                         <Font size="22.0"/>
                                     </font>
                                 </Label>
-                                <Label fx:id="tvSupplierInvoiceNo" text="12211415e" textFill="#7c7c7c">
+                                <Label fx:id="tvInvoiceNo" text="12211415e" textFill="#7c7c7c">
                                     <font>
                                         <Font size="14.0"/>
                                     </font>
@@ -51,7 +51,7 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="78.0" prefWidth="121.0">
                             <children>
-                                <Label fx:id="tvCompanyInvoiceNo" text="0000"/>
+                                <Label fx:id="tvAdmin" text="0000"/>
                                 <Label fx:id="tvTotalPrice" text="0000">
                                     <VBox.margin>
                                         <Insets top="10.0"/>

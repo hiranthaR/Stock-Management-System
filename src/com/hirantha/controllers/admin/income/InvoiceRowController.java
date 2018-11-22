@@ -18,9 +18,6 @@ public class InvoiceRowController implements Initializable {
     private AnchorPane itemRow;
 
     @FXML
-    private ImageView imgPhoto;
-
-    @FXML
     private Label tvInvoiceTitle;
 
     @FXML
@@ -42,7 +39,6 @@ public class InvoiceRowController implements Initializable {
     }
 
     public void init(Invoice invoice, InvoiceFullViewController invoiceFullViewController) {
-
 
         tvInvoiceTitle.setText(invoice.getName() + " @ " + simpleDateFormat.format(invoice.getDate()));
         tvSupplierInvoiceNo.setText(invoice.getInvoiceNumber());

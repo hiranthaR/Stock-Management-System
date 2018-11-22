@@ -63,7 +63,6 @@ public class OutgoingQueries {
 
     public void insertBill(Bill bill) {
         int id = MetaQueries.getInstance().getBillNextID();
-        System.out.println(bill);
 
         List<DBObject> tableItemList = new ArrayList<>();
         bill.getTableItems().forEach(e -> tableItemList.add(new BasicDBObject(ITEM_CODE, e.getItemId())

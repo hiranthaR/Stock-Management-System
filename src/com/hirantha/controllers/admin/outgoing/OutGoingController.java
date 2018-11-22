@@ -45,7 +45,7 @@ public class OutGoingController implements Initializable {
     private List<Bill> bills;
 
     //TODO: implement search
-    List<Bill> tempInvoices = new ArrayList<>(); //for search
+    List<Bill> tempBill = new ArrayList<>(); //for search
 
     private NewOutGoingInvoiceController newOutGoingInvoiceController;
     private AnchorPane newOutGoingView;
@@ -61,7 +61,7 @@ public class OutGoingController implements Initializable {
             outgoingFullViewPane = outgoingFullViewFxmlLoader.load();
             invoiceContainer.getChildren().add(outgoingFullViewPane);
             outGoingInvoiceFullViewController = outgoingFullViewFxmlLoader.getController();
-//            newOutGoingInvoiceController.setIncomeController(IncomeController.this);
+//            outGoingInvoiceFullViewController.setOutGoingController(this);
 
             //new items
             FXMLLoader newInvoiceFxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Outgoing.NEW_BILL));
@@ -91,7 +91,7 @@ public class OutGoingController implements Initializable {
         for (Bill bill : bills) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLS.Admin.Outgoing.BILL_ROW));
             AnchorPane row = fxmlLoader.load();
-//            fxmlLoader.<InvoiceRowController>getController().init(bill, invoiceFullViewController);
+            fxmlLoader.<OutGoingInvoiceRowController>getController().init(bill, outGoingInvoiceFullViewController);
             rowsContainer.getChildren().add(row);
         }
 
