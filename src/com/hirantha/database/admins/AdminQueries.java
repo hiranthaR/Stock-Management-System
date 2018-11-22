@@ -22,8 +22,8 @@ public class AdminQueries {
     private MongoDatabase db = con.getDatabase();
     private Gson gson = new Gson();
 
-    private String CUSTOMERS_COLLECTION = "admins";
-    private MongoCollection<Document> adminsMongoCollection = db.getCollection(CUSTOMERS_COLLECTION);
+    private String ADMINS_COLLECTION = "admins";
+    private MongoCollection<Document> adminsMongoCollection = db.getCollection(ADMINS_COLLECTION);
 
     private String ID = "_id";
     private String NAME = "name";
@@ -62,9 +62,7 @@ public class AdminQueries {
                         .append(USERNAME, admin.getUsername())
                         .append(LEVEL, admin.getLevel()));
 
-        UpdateResult result = adminsMongoCollection.updateOne(Filters.eq(ID, admin.getId()), newDataDocument);
-        System.out.println(result.getModifiedCount());
-        System.out.println(result.getMatchedCount());
+        adminsMongoCollection.updateOne(Filters.eq(ID, admin.getId()), newDataDocument);
 
     }
 
@@ -83,7 +81,7 @@ public class AdminQueries {
     }
 
     public Admin getAdmin(String id) {
-        return gson.fromJson(adminsMongoCollection.find(Filters.eq(ID, id)).first().toJson(), Admin.class);
+        return gson.fromJson(adminsMongoCollection.find(Filters.eq(ID, Integer.parseInt(id))).first().toJson(), Admin.class);
     }
 
 }

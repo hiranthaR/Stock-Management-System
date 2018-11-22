@@ -4,6 +4,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.Objects;
+
 public class TableItem {
 
     private SimpleStringProperty itemId; // == item code
@@ -79,4 +81,13 @@ public class TableItem {
     public void setCostPerItem(double costPerItem) {
         this.costPerItem.set(costPerItem);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TableItem tableItem = (TableItem) o;
+        return Objects.equals(itemId, tableItem.itemId);
+    }
+
 }

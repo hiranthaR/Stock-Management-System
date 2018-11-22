@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.Objects;
+
 public class BillTableItem {
 
     private SimpleStringProperty itemId; // == item code
@@ -107,5 +109,13 @@ public class BillTableItem {
 
     public void setPercentage(boolean percentage) {
         this.percentage.set(percentage);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BillTableItem that = (BillTableItem) o;
+        return Objects.equals(itemId, that.itemId);
     }
 }

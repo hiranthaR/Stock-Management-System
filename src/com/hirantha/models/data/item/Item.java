@@ -1,5 +1,7 @@
 package com.hirantha.models.data.item;
 
+import java.util.Objects;
+
 public class Item {
 
     private String _id; // == item code
@@ -127,5 +129,13 @@ public class Item {
             default:
                 return 0;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return Objects.equals(_id, item._id);
     }
 }

@@ -128,6 +128,9 @@ public class NewOutGoingInvoiceController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> txtName.requestFocus());
 
+        //button go back
+        btnCancel.setOnMouseClicked(e -> goBack());
+
         //loading items
         loadData();
 
@@ -254,10 +257,11 @@ public class NewOutGoingInvoiceController implements Initializable {
         btnRemove.setOnMouseClicked(e -> {
             BillTableItem billTableItem = table.getSelectionModel().getSelectedItem();
             table.getItems().remove(table.getSelectionModel().getSelectedIndex());
+
             if (txtBillCost.getText().isEmpty() || txtBillCost.getText().equals("0")) {
                 txtBillCost.setText(String.valueOf(billTableItem.getCostPerItem() * billTableItem.getQuantity()));
             } else {
-                txtBillCost.setText(String.valueOf(Double.parseDouble(txtBillCost.getText()) - billTableItem.getCostPerItem() * billTableItem.getQuantity()));
+                txtBillCost.setText(String.valueOf(Double.parseDouble(txtBillCost.getText()) + billTableItem.getDiscount() - billTableItem.getCostPerItem() * billTableItem.getQuantity()));
             }
 
             if (Double.parseDouble(txtBillCost.getText()) < 0) txtBillCost.setText("0");

@@ -34,7 +34,7 @@ public class OutGoingInvoiceRowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        itemRow.setOnMouseClicked(e -> outGoingInvoiceFullViewController.init(invoice));
+        itemRow.setOnMouseClicked(e -> outGoingInvoiceFullViewController.init(bill));
     }
 
     public void init(Bill bill, OutGoingInvoiceFullViewController outGoingInvoiceFullViewController) {

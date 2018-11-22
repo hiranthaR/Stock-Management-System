@@ -152,7 +152,6 @@ public class OutgoingQueries {
             int quantity = e.getInteger(ITEM_QUANTITY);
 
             tableItems.add(new BillTableItem(itemId, itemName, unit, quantity, costPerItem, discount, percentage));
-            System.out.println(tableItems.get(tableItems.size() - 1));
         });
         double billCost = document.getDouble(TOTAL_BILL_COST);
 

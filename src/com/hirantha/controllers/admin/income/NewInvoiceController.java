@@ -151,6 +151,9 @@ public class NewInvoiceController implements Initializable {
 
         Platform.runLater(() -> txtInvoiceNumber.requestFocus());
 
+        //button go back
+        btnCancel.setOnMouseClicked(e -> goBack());
+
         //loading items
         loadData();
 
