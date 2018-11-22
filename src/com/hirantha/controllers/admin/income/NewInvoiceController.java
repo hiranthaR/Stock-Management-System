@@ -3,41 +3,29 @@ package com.hirantha.controllers.admin.income;
 import animatefx.animation.FadeOut;
 import com.hirantha.admins.CurrentAdmin;
 import com.hirantha.admins.Permissions;
-import com.hirantha.controllers.admin.auth.LoginController;
 import com.hirantha.database.admins.AdminQueries;
 import com.hirantha.database.invoice.InvoiceQueries;
 import com.hirantha.database.items.ItemQueries;
 import com.hirantha.models.data.admins.Admin;
 import com.hirantha.models.data.invoice.Invoice;
 import com.hirantha.models.data.invoice.Supplier;
+import com.hirantha.models.data.item.InvoiceTableItem;
 import com.hirantha.models.data.item.Item;
-import com.hirantha.models.data.item.TableItem;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
-import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.apache.commons.lang3.text.WordUtils;
-import org.bson.types.ObjectId;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -85,22 +73,22 @@ public class NewInvoiceController implements Initializable {
     private Button btnRemove;
 
     @FXML
-    private TableView<TableItem> table;
+    private TableView<InvoiceTableItem> table;
 
     @FXML
-    private TableColumn<TableItem, String> clmnCode;
+    private TableColumn<InvoiceTableItem, String> clmnCode;
 
     @FXML
-    private TableColumn<TableItem, String> clmnName;
+    private TableColumn<InvoiceTableItem, String> clmnName;
 
     @FXML
-    private TableColumn<TableItem, String> clmnUnit;
+    private TableColumn<InvoiceTableItem, String> clmnUnit;
 
     @FXML
-    private TableColumn<TableItem, Double> clmnCostPerItem;
+    private TableColumn<InvoiceTableItem, Double> clmnCostPerItem;
 
     @FXML
-    private TableColumn<TableItem, Integer> clmnQuantity;
+    private TableColumn<InvoiceTableItem, Integer> clmnQuantity;
 
     @FXML
     private TextField txtBillCost;
@@ -275,12 +263,12 @@ public class NewInvoiceController implements Initializable {
         });
 
         btnRemove.setOnMouseClicked(e -> {
-            TableItem tableItem = table.getSelectionModel().getSelectedItem();
+            InvoiceTableItem invoiceTableItem = table.getSelectionModel().getSelectedItem();
             table.getItems().remove(table.getSelectionModel().getSelectedIndex());
             if (txtBillCost.getText().isEmpty() || txtBillCost.getText().equals("0")) {
-                txtBillCost.setText(String.valueOf(tableItem.getCostPerItem() * tableItem.getQuantity()));
+                txtBillCost.setText(String.valueOf(invoiceTableItem.getCostPerItem() * invoiceTableItem.getQuantity()));
             } else {
-                txtBillCost.setText(String.valueOf(Double.parseDouble(txtBillCost.getText()) - tableItem.getCostPerItem() * tableItem.getQuantity()));
+                txtBillCost.setText(String.valueOf(Double.parseDouble(txtBillCost.getText()) - invoiceTableItem.getCostPerItem() * invoiceTableItem.getQuantity()));
             }
 
             if (Double.parseDouble(txtBillCost.getText()) < 0) txtBillCost.setText("0");
@@ -457,8 +445,8 @@ public class NewInvoiceController implements Initializable {
 
     private void addItemToTable() {
         if (checkTableItemProperties()) {
-            TableItem tableItem = createTableItem();
-            table.getItems().add(tableItem);
+            InvoiceTableItem invoiceTableItem = createTableItem();
+            table.getItems().add(invoiceTableItem);
             cmbItemCode.requestFocus();
             cmbItemCode.setValue(null);
             cmbItemName.setValue(null);
@@ -467,9 +455,9 @@ public class NewInvoiceController implements Initializable {
             tvUnit.setText("");
 
             if (txtBillCost.getText().isEmpty() || txtBillCost.getText().equals("0")) {
-                txtBillCost.setText(String.valueOf(tableItem.getCostPerItem() * tableItem.getQuantity()));
+                txtBillCost.setText(String.valueOf(invoiceTableItem.getCostPerItem() * invoiceTableItem.getQuantity()));
             } else {
-                txtBillCost.setText(String.valueOf(Double.parseDouble(txtBillCost.getText()) + tableItem.getCostPerItem() * tableItem.getQuantity()));
+                txtBillCost.setText(String.valueOf(Double.parseDouble(txtBillCost.getText()) + invoiceTableItem.getCostPerItem() * invoiceTableItem.getQuantity()));
             }
 
         }
@@ -494,14 +482,14 @@ public class NewInvoiceController implements Initializable {
         return status;
     }
 
-    private TableItem createTableItem() {
+    private InvoiceTableItem createTableItem() {
         String itemCode = selectedItem.getItemCode();
         String itemName = selectedItem.getName();
         String unit = selectedItem.getUnit();
         int quantity = Integer.parseInt(txtQuanitiy.getText());
         double costPerItem = Double.parseDouble(txtCostPerItem.getText());
 
-        return new TableItem(itemCode, itemName, unit, quantity, costPerItem);
+        return new InvoiceTableItem(itemCode, itemName, unit, quantity, costPerItem);
     }
 
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -565,7 +553,7 @@ public class NewInvoiceController implements Initializable {
         String invoiceNumber = txtInvoiceNumber.getText();
         String supplierName = txtName.getText();
         String supplierAddress = txtAddress.getText();
-        List<TableItem> tableItems = new ArrayList<>(table.getItems());
+        List<InvoiceTableItem> invoiceTableItems = new ArrayList<>(table.getItems());
         double billCost = Double.parseDouble(txtBillCost.getText());
         boolean cash = (boolean) cashOrCheck.getSelectedToggle().getUserData();
 
@@ -588,7 +576,7 @@ public class NewInvoiceController implements Initializable {
         String checkedAdminId = cmbchecked.getValue().getId();
 
 
-        return new Invoice(goingToUpdate ? invoice.get_id() : "", date, invoiceNumber, supplierName, supplierAddress, tableItems, billCost, cash, bank, branch, chequeDate, amount, preparedAdminName, preparedAdminId, checkedAdminName, checkedAdminId, acceptedAdminName, acceptedAdminId);
+        return new Invoice(goingToUpdate ? invoice.get_id() : "", date, invoiceNumber, supplierName, supplierAddress, invoiceTableItems, billCost, cash, bank, branch, chequeDate, amount, preparedAdminName, preparedAdminId, checkedAdminName, checkedAdminId, acceptedAdminName, acceptedAdminId);
     }
 
     private void clearFields() {
@@ -641,7 +629,7 @@ public class NewInvoiceController implements Initializable {
         txtName.setText(invoice.getName());
         txtAddress.setText(invoice.getAddress());
         txtInvoiceNumber.setText(invoice.getInvoiceNumber());
-        table.getItems().addAll(invoice.getTableItems());
+        table.getItems().addAll(invoice.getInvoiceTableItems());
         txtBillCost.setText(String.valueOf(invoice.getBillCost()));
         if (invoice.isCash()) {
             radioCash.setSelected(true);

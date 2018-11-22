@@ -1,7 +1,6 @@
 package com.hirantha.models.data.invoice;
 
-import com.hirantha.models.data.item.TableItem;
-import org.bson.types.ObjectId;
+import com.hirantha.models.data.item.InvoiceTableItem;
 
 import java.util.Date;
 import java.util.List;
@@ -14,7 +13,7 @@ public class Invoice {
     String name;
     String address;
 
-    List<TableItem> tableItems;
+    List<InvoiceTableItem> invoiceTableItems;
     double billCost;
     boolean cash;
     String bank;
@@ -28,13 +27,13 @@ public class Invoice {
     String acceptedAdminName;
     String acceptedAdminId;
 
-    public Invoice(String _id, Date date, String invoiceNumber, String name, String address, List<TableItem> tableItems, double billCost, boolean cash, String bank, String branch, Date chequeDate, double amount, String preparedAdminName, String preparedAdminId, String checkedAdminName, String checkedAdminId, String acceptedAdminName, String acceptedAdminId) {
+    public Invoice(String _id, Date date, String invoiceNumber, String name, String address, List<InvoiceTableItem> invoiceTableItems, double billCost, boolean cash, String bank, String branch, Date chequeDate, double amount, String preparedAdminName, String preparedAdminId, String checkedAdminName, String checkedAdminId, String acceptedAdminName, String acceptedAdminId) {
         this._id = _id;
         this.date = date;
         this.invoiceNumber = invoiceNumber;
         this.name = name;
         this.address = address;
-        this.tableItems = tableItems;
+        this.invoiceTableItems = invoiceTableItems;
         this.billCost = billCost;
         this.cash = cash;
         this.bank = bank;
@@ -94,12 +93,12 @@ public class Invoice {
         return this;
     }
 
-    public List<TableItem> getTableItems() {
-        return tableItems;
+    public List<InvoiceTableItem> getInvoiceTableItems() {
+        return invoiceTableItems;
     }
 
-    public Invoice setTableItems(List<TableItem> tableItems) {
-        this.tableItems = tableItems;
+    public Invoice setInvoiceTableItems(List<InvoiceTableItem> invoiceTableItems) {
+        this.invoiceTableItems = invoiceTableItems;
         return this;
     }
 
@@ -219,7 +218,7 @@ public class Invoice {
                 ", invoiceNumber='" + invoiceNumber + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", tableItems=" + tableItems +
+                ", invoiceTableItems=" + invoiceTableItems +
                 ", billCost=" + billCost +
                 ", cash=" + cash +
                 ", bank='" + bank + '\'' +

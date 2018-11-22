@@ -2,7 +2,7 @@ package com.hirantha.controllers.admin.income;
 
 import com.hirantha.database.invoice.InvoiceQueries;
 import com.hirantha.models.data.invoice.Invoice;
-import com.hirantha.models.data.item.TableItem;
+import com.hirantha.models.data.item.InvoiceTableItem;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -33,22 +33,22 @@ public class InvoiceFullViewController implements Initializable {
     private Label tvSupplierAddress;
 
     @FXML
-    private TableView<TableItem> table;
+    private TableView<InvoiceTableItem> table;
 
     @FXML
-    private TableColumn<TableItem, String> clmnCode;
+    private TableColumn<InvoiceTableItem, String> clmnCode;
 
     @FXML
-    private TableColumn<TableItem, String> clmnName;
+    private TableColumn<InvoiceTableItem, String> clmnName;
 
     @FXML
-    private TableColumn<TableItem, String> clmnUnit;
+    private TableColumn<InvoiceTableItem, String> clmnUnit;
 
     @FXML
-    private TableColumn<TableItem, Double> clmnCostPerItem;
+    private TableColumn<InvoiceTableItem, Double> clmnCostPerItem;
 
     @FXML
-    private TableColumn<TableItem, Integer> clmnQuantity;
+    private TableColumn<InvoiceTableItem, Integer> clmnQuantity;
 
     @FXML
     private Label tvTotalCost;
@@ -134,7 +134,7 @@ public class InvoiceFullViewController implements Initializable {
         tvSupplierAddress.setText(invoice.getAddress());
 
         table.getItems().clear();
-        table.getItems().addAll(invoice.getTableItems());
+        table.getItems().addAll(invoice.getInvoiceTableItems());
 
         tvTotalCost.setText(String.valueOf(invoice.getBillCost()));
 

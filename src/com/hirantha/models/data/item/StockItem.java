@@ -1,25 +1,21 @@
 package com.hirantha.models.data.item;
 
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.util.Objects;
 
-public class TableItem {
-
+public class StockItem {
     private SimpleStringProperty itemId; // == item code
     private SimpleStringProperty name;
     private SimpleStringProperty unit;
     private SimpleIntegerProperty quantity;
-    private SimpleDoubleProperty costPerItem;
 
-    public TableItem(String itemId, String name, String unit, int quantity, double costPerItem) {
+    public StockItem(String itemId, String name, String unit, int quantity) {
         this.itemId = new SimpleStringProperty(itemId);
         this.name = new SimpleStringProperty(name);
         this.unit = new SimpleStringProperty(unit);
         this.quantity = new SimpleIntegerProperty(quantity);
-        this.costPerItem = new SimpleDoubleProperty(costPerItem);
     }
 
     public String getItemId() {
@@ -70,24 +66,11 @@ public class TableItem {
         this.quantity.set(quantity);
     }
 
-    public double getCostPerItem() {
-        return costPerItem.get();
-    }
 
-    public SimpleDoubleProperty costPerItemProperty() {
-        return costPerItem;
-    }
-
-    public void setCostPerItem(double costPerItem) {
-        this.costPerItem.set(costPerItem);
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TableItem tableItem = (TableItem) o;
-        return Objects.equals(itemId, tableItem.itemId);
+        StockItem stockItem = (StockItem) o;
+        return Objects.equals(itemId, stockItem.itemId);
     }
-
 }

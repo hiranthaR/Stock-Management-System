@@ -1,11 +1,12 @@
 package com.hirantha.database.invoice;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hirantha.database.Connection;
 import com.hirantha.database.meta.MetaQueries;
 import com.hirantha.models.data.invoice.Invoice;
 import com.hirantha.models.data.invoice.Supplier;
-import com.hirantha.models.data.item.TableItem;
+import com.hirantha.models.data.item.InvoiceTableItem;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.client.FindIterable;
@@ -15,6 +16,7 @@ import com.mongodb.client.model.Filters;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
 
+import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -67,7 +69,7 @@ public class InvoiceQueries {
         int id = MetaQueries.getInstance().getInvoiceNextID();
 
         List<DBObject> tableItemList = new ArrayList<>();
-        invoice.getTableItems().forEach(e -> tableItemList.add(new BasicDBObject(ITEM_CODE, e.getItemId())
+        invoice.getInvoiceTableItems().forEach(e -> tableItemList.add(new BasicDBObject(ITEM_CODE, e.getItemId())
                 .append(ITEM_NAME, e.getName())
                 .append(ITEM_UNIT, e.getUnit())
                 .append(ITEM_QUANTITY, e.getQuantity())
@@ -98,7 +100,7 @@ public class InvoiceQueries {
     public void updateInvoice(Invoice invoice) {
 
         List<DBObject> tableItemList = new ArrayList<>();
-        invoice.getTableItems().forEach(e -> tableItemList.add(new BasicDBObject(ITEM_CODE, e.getItemId())
+        invoice.getInvoiceTableItems().forEach(e -> tableItemList.add(new BasicDBObject(ITEM_CODE, e.getItemId())
                 .append(ITEM_NAME, e.getName())
                 .append(ITEM_UNIT, e.getUnit())
                 .append(ITEM_QUANTITY, e.getQuantity())
@@ -147,13 +149,34 @@ public class InvoiceQueries {
         return invoices;
     }
 
+    public List<InvoiceTableItem> getInvoiceTableItems() {
+        List<InvoiceTableItem> invoiceTableItems = new ArrayList<>();
+
+        String projection = "{_id:0," + ITEMS + ":1}";
+        List<Document> itemsListOfList = invoicesMongoCollection.find().projection(BasicDBObject.parse(projection)).into(new ArrayList<>());
+        for (Document itemsList : itemsListOfList) {
+            List<Document> itemList = (List<Document>) itemsList.get("tableItems");
+            for (Document item : itemList) {
+                String itemId = item.getString(ITEM_CODE);
+                String name = item.getString(ITEM_NAME);
+                String unit = item.getString(ITEM_UNIT);
+                int quantity = item.getInteger(ITEM_QUANTITY);
+                double costPerItem = item.getDouble(COST_PER_ITEM);
+                invoiceTableItems.add(new InvoiceTableItem(itemId, name, unit, quantity, costPerItem));
+            }
+        }
+
+
+        return invoiceTableItems;
+    }
+
     private Invoice createInvoice(Document document) {
         String id = document.getString(INVOICE_ID);
         Date date = document.getDate(DATE);
         String invoiceNumber = document.getString(SUPPLIER_INVOICE_NUMBER);
         String supplierName = document.getString(SUPPLIER_NAME);
         String supplierAddress = document.getString(SUPPLIER_ADDRESS);
-        List<TableItem> tableItems = new ArrayList<>();
+        List<InvoiceTableItem> invoiceTableItems = new ArrayList<>();
         ArrayList<Document> itemsList = (ArrayList<Document>) document.get(ITEMS);
         itemsList.forEach(e -> {
 
@@ -163,7 +186,7 @@ public class InvoiceQueries {
             double costPerItem = e.getDouble(COST_PER_ITEM);
             int quantity = e.getInteger(ITEM_QUANTITY);
 
-            tableItems.add(new TableItem(itemId, itemName, unit, quantity, costPerItem));
+            invoiceTableItems.add(new InvoiceTableItem(itemId, itemName, unit, quantity, costPerItem));
         });
         double billCost = document.getDouble(TOTAL_BILL_COST);
         boolean cash = document.getBoolean(CASH);
@@ -186,10 +209,11 @@ public class InvoiceQueries {
         String checkedAdminName = document.getString(CHECKED_ADMIN_NAME);
         String checkedAdminId = document.getString(CHECKED_ADMIN_ID);
 
-        return new Invoice(id, date, invoiceNumber, supplierName, supplierAddress, tableItems, billCost, cash, bank, branch, chequeDate, amount, preparedAdminName, preparedAdminId, checkedAdminName, checkedAdminId, acceptedAdminName, acceptedAdminId);
+        return new Invoice(id, date, invoiceNumber, supplierName, supplierAddress, invoiceTableItems, billCost, cash, bank, branch, chequeDate, amount, preparedAdminName, preparedAdminId, checkedAdminName, checkedAdminId, acceptedAdminName, acceptedAdminId);
     }
 
     public void deleteInvoice(Invoice invoice) {
         invoicesMongoCollection.deleteOne(Filters.eq(INVOICE_ID, invoice.get_id()));
     }
+
 }

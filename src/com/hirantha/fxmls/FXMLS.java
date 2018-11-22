@@ -1,7 +1,5 @@
 package com.hirantha.fxmls;
 
-import org.apache.commons.lang3.StringUtils;
-
 public class FXMLS {
     public static class Admin {
         public static String MAIN_DASHBOARD = "/com/hirantha/fxmls/admin/dashboard.fxml";
@@ -22,7 +20,7 @@ public class FXMLS {
         }
 
         public static class Stocks {
-            public static String STOCKS_DASHBOARD = "/com/hirantha/fxmls/admin/stocks.fxml";
+            public static String STOCKS_DASHBOARD = "/com/hirantha/fxmls/admin/stock/stocks.fxml";
         }
 
         public static class Financial {

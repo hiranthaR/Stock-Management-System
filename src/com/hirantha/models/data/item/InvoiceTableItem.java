@@ -1,33 +1,25 @@
 package com.hirantha.models.data.item;
 
-import com.hirantha.models.data.outgoing.Bill;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-public class BillTableItem {
+public class InvoiceTableItem {
 
     private SimpleStringProperty itemId; // == item code
     private SimpleStringProperty name;
     private SimpleStringProperty unit;
     private SimpleIntegerProperty quantity;
     private SimpleDoubleProperty costPerItem;
-    private SimpleDoubleProperty discount;
-    private SimpleBooleanProperty percentage;
 
-    public BillTableItem(String itemId, String name, String unit, int quantity, double costPerItem, double discount, boolean percentage) {
+    public InvoiceTableItem(String itemId, String name, String unit, int quantity, double costPerItem) {
         this.itemId = new SimpleStringProperty(itemId);
         this.name = new SimpleStringProperty(name);
         this.unit = new SimpleStringProperty(unit);
         this.quantity = new SimpleIntegerProperty(quantity);
         this.costPerItem = new SimpleDoubleProperty(costPerItem);
-        this.discount = new SimpleDoubleProperty(discount);
-        this.percentage = new SimpleBooleanProperty(percentage);
     }
 
     public String getItemId() {
@@ -90,35 +82,12 @@ public class BillTableItem {
         this.costPerItem.set(costPerItem);
     }
 
-    public double getDiscount() {
-        return discount.get();
-    }
-
-    public SimpleDoubleProperty discountProperty() {
-        return discount;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount.set(discount);
-    }
-
-    public boolean isPercentage() {
-        return percentage.get();
-    }
-
-    public SimpleBooleanProperty percentageProperty() {
-        return percentage;
-    }
-
-    public void setPercentage(boolean percentage) {
-        this.percentage.set(percentage);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BillTableItem that = (BillTableItem) o;
-        return Objects.equals(itemId, that.itemId);
+        InvoiceTableItem invoiceTableItem = (InvoiceTableItem) o;
+        return Objects.equals(itemId, invoiceTableItem.itemId);
     }
+
 }
