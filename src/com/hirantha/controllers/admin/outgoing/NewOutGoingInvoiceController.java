@@ -116,13 +116,14 @@ public class NewOutGoingInvoiceController implements Initializable {
     private Item selectedItem;
     private List<Admin> admins;
     private boolean goingToUpdate;
-    private Bill bill;
+    private Bill currentBill;
     private OutGoingController outGoingController;
     private Set<Customer> customers;
     private Customer selectedCustomer;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         Platform.runLater(() -> txtName.requestFocus());
 
         //button go back
@@ -544,13 +545,13 @@ public class NewOutGoingInvoiceController implements Initializable {
         String vehicleNumber = txtVehicleNumber.getText();
 
 
-        return new Bill("", date, customerId, customerName, customerAddress, customerRank, tableItems, billCost, preparedAdminName, preparedAdminId, checkedAdminName, checkedAdminId, acceptedAdminName, acceptedAdminId, vehicleNumber);
+        return new Bill(goingToUpdate ? currentBill.get_id() : "", date, customerId, customerName, customerAddress, customerRank, tableItems, billCost, preparedAdminName, preparedAdminId, checkedAdminName, checkedAdminId, acceptedAdminName, acceptedAdminId, vehicleNumber);
     }
 
 
     public void initToUpdate(Bill bill) {
 
-        this.bill = bill;
+        this.currentBill = bill;
         this.goingToUpdate = true;
         dpDate.setValue(new java.sql.Date(bill.getDate().getTime()).toLocalDate());
         txtName.setText(bill.getCustomerName());

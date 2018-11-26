@@ -1,6 +1,7 @@
 package com.hirantha.controllers.admin.stock;
 
 import com.hirantha.database.invoice.InvoiceQueries;
+import com.hirantha.database.outgoing.OutgoingQueries;
 import com.hirantha.models.data.item.BillTableItem;
 import com.hirantha.models.data.item.InvoiceTableItem;
 import com.hirantha.models.data.item.StockItem;
@@ -60,16 +61,18 @@ public class StocksController implements Initializable {
                 stockItemMap.put(invoiceTableItem.getItemId(), new StockItem(invoiceTableItem.getItemId(), invoiceTableItem.getName(), invoiceTableItem.getUnit(), invoiceTableItem.getQuantity()));
             }
         }
-//        List<BillTableItem> billTableItems = new ArrayList<>();
-//        for (BillTableItem billTableItem:billTableItems){
-//            if(stockItemMap.containsKey(billTableItem.getItemId())){
-//                StockItem stockItem = stockItemMap.get(billTableItem.getItemId());
-//                stockItem.setQuantity(stockItem.getQuantity() - billTableItem.getQuantity());
-//            } else {
-//                stockItemMap.put(billTableItem.getItemId(),new StockItem(billTableItem.getItemId(),billTableItem.getName(),billTableItem.getUnit(),billTableItem.getQuantity() * -1));
-//            }
-//        }
+        List<BillTableItem> billTableItems = OutgoingQueries.getInstance().getBillTableItems();
+        for (BillTableItem billTableItem : billTableItems) {
+            if (stockItemMap.containsKey(billTableItem.getItemId())) {
+                StockItem stockItem = stockItemMap.get(billTableItem.getItemId());
+                stockItem.setQuantity(stockItem.getQuantity() - billTableItem.getQuantity());
+            } else {
+                stockItemMap.put(billTableItem.getItemId(), new StockItem(billTableItem.getItemId(), billTableItem.getName(), billTableItem.getUnit(), billTableItem.getQuantity() * -1));
+            }
+        }
 
         table.getItems().addAll(stockItemMap.values());
     }
 }
+
+//TODO check what happen with outgoing item update;

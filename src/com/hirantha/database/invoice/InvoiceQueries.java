@@ -165,8 +165,6 @@ public class InvoiceQueries {
                 invoiceTableItems.add(new InvoiceTableItem(itemId, name, unit, quantity, costPerItem));
             }
         }
-
-
         return invoiceTableItems;
     }
 

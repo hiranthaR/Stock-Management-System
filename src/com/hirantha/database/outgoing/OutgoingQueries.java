@@ -11,6 +11,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.result.UpdateResult;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
 
@@ -94,6 +95,8 @@ public class OutgoingQueries {
 
     public void updateInvoice(Bill bill) {
 
+        System.out.println(bill.get_id());
+
         List<DBObject> tableItemList = new ArrayList<>();
         bill.getTableItems().forEach(e -> tableItemList.add(new BasicDBObject(ITEM_CODE, e.getItemId())
                 .append(ITEM_NAME, e.getName())
@@ -120,7 +123,9 @@ public class OutgoingQueries {
                         .append(CHECKED_ADMIN_NAME, bill.getCheckedAdminName())
                         .append(VEHICLE_NO, bill.getVehicleNumber()));
 
-        billsMongoCollection.updateOne(Filters.eq(INVOICE_ID, bill.get_id()), newDataDocument);
+        UpdateResult result = billsMongoCollection.updateOne(Filters.eq(INVOICE_ID, bill.get_id()), newDataDocument);
+        System.out.println(result.getModifiedCount());
+        System.out.println(result.getMatchedCount());
     }
 
     public List<Bill> getBills() {
@@ -165,6 +170,27 @@ public class OutgoingQueries {
         String vehicleNumber = document.getString(VEHICLE_NO);
 
         return new Bill(id, date, customerId, customerName, customerAddress, customerRank, tableItems, billCost, preparedAdminName, preparedAdminId, checkedAdminName, checkedAdminId, acceptedAdminName, acceptedAdminId, vehicleNumber);
+    }
+
+    public List<BillTableItem> getBillTableItems() {
+        List<BillTableItem> billTableItems = new ArrayList<>();
+
+        String projection = "{_id:0," + ITEMS + ":1}";
+        List<Document> itemsListOfList = billsMongoCollection.find().projection(BasicDBObject.parse(projection)).into(new ArrayList<>());
+        for (Document itemsList : itemsListOfList) {
+            List<Document> itemList = (List<Document>) itemsList.get(ITEMS);
+            for (Document item : itemList) {
+                String itemId = item.getString(ITEM_CODE);
+                String name = item.getString(ITEM_NAME);
+                String unit = item.getString(ITEM_UNIT);
+                int quantity = item.getInteger(ITEM_QUANTITY);
+                double costPerItem = item.getDouble(COST_PER_ITEM);
+                boolean percentage = item.getBoolean(PERCENTAGE);
+                double discount = item.getDouble(DISCOUNT);
+                billTableItems.add(new BillTableItem(itemId, name, unit, quantity, costPerItem, discount, percentage));
+            }
+        }
+        return billTableItems;
     }
 
     public void deleteBill(Bill bill) {
